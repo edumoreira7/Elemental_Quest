@@ -1,0 +1,240 @@
+#if UNITY_EDITOR
+using System;
+using System.Collections;
+using System.IO;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class QuestSmokeTest : MonoBehaviour
+{
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void Iniciar()
+    {
+        if (!Environment.GetCommandLineArgs().Contains("-questTest"))
+            return;
+        GameObject objeto = new GameObject("Verificacao automatica da aventura");
+        DontDestroyOnLoad(objeto);
+        objeto.AddComponent<QuestSmokeTest>();
+    }
+
+    private IEnumerator Start()
+    {
+        Application.logMessageReceived += Erro;
+        QuestSession.NovoJogo();
+        yield return new WaitForSeconds(1f);
+        QuestPlayer jogador = FindFirstObjectByType<QuestPlayer>();
+        Exigir(jogador != null, "Jogador presente");
+        Exigir(Mathf.Abs(jogador.GetComponent<Collider2D>().bounds.min.y + 3f) < .15f, "Colisao com o chao");
+        Capturar("Fase1-previa.png");
+        Camera cameraTeste = Camera.main;
+        QuestCamera seguirCamera = cameraTeste.GetComponent<QuestCamera>();
+        QuestBackground fundoTeste = FindAnyObjectByType<QuestBackground>();
+        QuestBackground[] camadasTeste = FindObjectsByType<QuestBackground>();
+        Exigir(camadasTeste.Length == 3, "Tres camadas de fundo na fase");
+        foreach (QuestBackground camada in camadasTeste)
+        {
+            Exigir(camada.paineis.Length == 4, "Quatro paineis por camada");
+            for (int indice = 0; indice < camada.paineis.Length; indice++)
+            {
+                SpriteRenderer painel = camada.paineis[indice].GetComponent<SpriteRenderer>();
+                Exigir(painel.sprite == camada.paineis[0].GetComponent<SpriteRenderer>().sprite
+                    && painel.flipX == (indice % 2 == 1), "Repeticao espelhada sem trocar de imagem");
+            }
+        }
+        Vector3 cameraOriginal = cameraTeste.transform.position;
+        Rigidbody2D corpoTeste = jogador.GetComponent<Rigidbody2D>();
+        Vector2 jogadorOriginal = corpoTeste.position;
+        seguirCamera.enabled = false;
+        float painelOriginal = fundoTeste.paineis[0].position.x;
+        corpoTeste.position += Vector2.right * .5f;
+        yield return null;
+        yield return null;
+        Exigir(Mathf.Abs(fundoTeste.paineis[0].position.x - painelOriginal) < .001f, "Fundo parado quando so o pato se move");
+        cameraTeste.transform.position += Vector3.right * 3f;
+        yield return null;
+        yield return null;
+        Exigir(Mathf.Abs(fundoTeste.paineis[0].position.x - painelOriginal - 3f * (1f - fundoTeste.fator)) < .005f, "Parallax segue o deslocamento da camera");
+        cameraTeste.transform.position = cameraOriginal;
+        corpoTeste.position = jogadorOriginal;
+        seguirCamera.enabled = true;
+        QuestEnemy guaxinimRapido = FindObjectsByType<QuestEnemy>(FindObjectsSortMode.None).First(alvo => alvo.tipo == QuestEnemy.Tipo.Guaxinim);
+        Rigidbody2D corpoGuaxinim = guaxinimRapido.GetComponent<Rigidbody2D>();
+        corpoGuaxinim.position = new Vector2(10f, corpoGuaxinim.position.y);
+        yield return new WaitForSeconds(.25f);
+        Exigir(Mathf.Abs(corpoGuaxinim.position.x - 10f) > .5f, "Guaxinim patrulha mais rapido");
+        QuestSession.Atual.Portal();
+        Exigir(SceneManager.GetActiveScene().name == "Fase1", "Portal bloqueia coleta incompleta");
+        jogador.Ferir();
+        jogador.Ferir();
+        Exigir(QuestSession.Vidas == 2, "Dano e invulnerabilidade");
+        yield return new WaitForSeconds(1.9f);
+        jogador.transform.position = new Vector3(-5f, -9f, 0f);
+        yield return null;
+        yield return null;
+        Exigir(QuestSession.Vidas == 1 && jogador.transform.position.y > -8f, "Queda remove vida e reposiciona");
+        QuestSession.Vidas = 3;
+        PatoController controle = jogador.GetComponent<PatoController>();
+        Rigidbody2D corpo = jogador.GetComponent<Rigidbody2D>();
+        controle.enabled = false;
+        float posicaoInicial = corpo.position.x;
+        corpo.linearVelocity = new Vector2(4f, 0);
+        yield return new WaitForSeconds(.3f);
+        Exigir(corpo.position.x > posicaoInicial + .5f, "Movimento fisico horizontal");
+        corpo.linearVelocity = Vector2.zero;
+        float alturaInicial = corpo.position.y;
+        corpo.AddForce(Vector2.up * controle.forcaPulo, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(.25f);
+        Exigir(corpo.position.y > alturaInicial + .8f, "Pulo fisico");
+        corpo.position = new Vector2(-5f, -2.3f);
+        corpo.linearVelocity = Vector2.zero;
+        controle.enabled = true;
+        controle.IniciarAtaque();
+        yield return new WaitForSeconds(.45f);
+        Exigir(FindObjectsByType<ProjetilPoder>(FindObjectsSortMode.None).Length > 0, "Evento de ataque cria projetil");
+        yield return new WaitForSeconds(.2f);
+        QuestEnemy inimigo = FindObjectsByType<QuestEnemy>(FindObjectsSortMode.None).First(alvo => alvo.tipo == QuestEnemy.Tipo.Guaxinim);
+        int pontosAntes = QuestSession.Pontos;
+        GameObject magia = Instantiate(controle.prefabPoder, inimigo.GetComponent<Collider2D>().bounds.center, Quaternion.identity);
+        magia.GetComponent<ProjetilPoder>().Inicializar(Vector2.right, jogador.GetComponent<Collider2D>());
+        yield return new WaitForSeconds(.1f);
+        Exigir(QuestSession.Pontos == pontosAntes + 50, "Magia derrota inimigo e soma pontos");
+        QuestEnemy guardiao = FindObjectsByType<QuestEnemy>(FindObjectsSortMode.None).First(alvo => alvo.tipo == QuestEnemy.Tipo.Guardiao);
+        Rigidbody2D corpoGuardiao = guardiao.GetComponent<Rigidbody2D>();
+        Vector2 inicioGuardiao = corpoGuardiao.position;
+        controle.enabled = false;
+        corpo.gravityScale = 0f;
+        corpo.linearVelocity = Vector2.zero;
+        corpoGuardiao.position = new Vector2(49f, inicioGuardiao.y);
+        corpo.position = new Vector2(46.75f, -2.3f);
+        yield return new WaitForSeconds(.35f);
+        Exigir(corpoGuardiao.position.x < 48.6f, "Guardiao persegue o pato para a esquerda");
+        float esquerdaGuardiao = corpoGuardiao.position.x;
+        corpo.position = new Vector2(corpoGuardiao.position.x + 2.25f, -2.3f);
+        yield return new WaitForSeconds(.35f);
+        Exigir(corpoGuardiao.position.x > esquerdaGuardiao + .4f, "Guardiao muda a perseguicao para a direita");
+        corpoGuardiao.position = new Vector2(36.5f, inicioGuardiao.y);
+        corpo.position = new Vector2(31.5f, -2.3f);
+        yield return new WaitForSeconds(.35f);
+        Exigir(corpoGuardiao.position.x >= 36.5f && corpoGuardiao.position.x < 37.1f, "Guardiao nao atravessa o abismo nem teleporta ao voltar");
+        corpoGuardiao.position = inicioGuardiao;
+        corpo.position = new Vector2(-5f, -2.3f);
+        corpo.gravityScale = 3f;
+        controle.enabled = true;
+        yield return new WaitForFixedUpdate();
+        int pontosGuardiao = QuestSession.Pontos;
+        GameObject primeiroTiro = Instantiate(controle.prefabPoder, guardiao.GetComponent<Collider2D>().bounds.center, Quaternion.identity);
+        primeiroTiro.GetComponent<ProjetilPoder>().Inicializar(Vector2.right, jogador.GetComponent<Collider2D>());
+        yield return new WaitForSeconds(.1f);
+        Exigir(guardiao.vidas == 1 && QuestSession.Pontos == pontosGuardiao, "Guardiao resiste ao primeiro acerto");
+        yield return new WaitForSeconds(.35f);
+        GameObject segundoTiro = Instantiate(controle.prefabPoder, guardiao.GetComponent<Collider2D>().bounds.center, Quaternion.identity);
+        segundoTiro.GetComponent<ProjetilPoder>().Inicializar(Vector2.right, jogador.GetComponent<Collider2D>());
+        yield return new WaitForSeconds(.1f);
+        Exigir(QuestSession.Pontos == pontosGuardiao + 50, "Guardiao derrotado no segundo acerto");
+        QuestEnemy atirador = FindObjectsByType<QuestEnemy>(FindObjectsSortMode.None).First(alvo => alvo.tipo == QuestEnemy.Tipo.Atirador);
+        controle.enabled = false;
+        corpo.gravityScale = 0;
+        corpo.position = new Vector2(atirador.transform.position.x - 4f, -2.3f);
+        corpo.linearVelocity = Vector2.zero;
+        float prazoAtaque = Time.time + 4f;
+        while (atirador.GetComponent<SpriteRenderer>().sprite != atirador.atacar.Last() && Time.time < prazoAtaque)
+            yield return null;
+        Exigir(FindAnyObjectByType<QuestEnemyShot>() != null, "Atirador dispara projetil animado");
+        Exigir(atirador.GetComponent<SpriteRenderer>().sprite == atirador.atacar.Last(), "Ataque exibe o ultimo quadro da cartela");
+        Camera cameraCenario = Camera.main;
+        cameraCenario.GetComponent<QuestCamera>().enabled = false;
+        cameraCenario.transform.position = new Vector3(29f, .3f, -10f);
+        foreach (QuestBackground camada in FindObjectsByType<QuestBackground>())
+            camada.SendMessage("LateUpdate");
+        Capturar("Inimigos-e-cenario.png");
+        cameraCenario.GetComponent<QuestCamera>().enabled = true;
+        foreach (QuestEnemyShot tiro in FindObjectsByType<QuestEnemyShot>(FindObjectsSortMode.None))
+            Destroy(tiro.gameObject);
+        SpriteRenderer rampa = FindObjectsByType<SpriteRenderer>(FindObjectsSortMode.None).First(alvo => alvo.sprite != null && alvo.sprite.name == "Cenario_02");
+        Bounds limitesRampa = rampa.GetComponent<Collider2D>().bounds;
+        corpo.gravityScale = 3f;
+        corpo.position = new Vector2(limitesRampa.center.x, limitesRampa.max.y + 2f);
+        corpo.linearVelocity = Vector2.zero;
+        controle.enabled = true;
+        yield return new WaitForSeconds(1f);
+        float peDoPato = jogador.GetComponent<Collider2D>().bounds.min.y;
+        Exigir(peDoPato >= limitesRampa.min.y - .1f && peDoPato <= limitesRampa.max.y + .2f, "Colisao fisica sobre rampa recortada");
+        for (int numero = 1; numero <= 2; numero++)
+        {
+            if (numero == 2)
+                Capturar("Fase2-previa.png");
+            jogador = FindFirstObjectByType<QuestPlayer>();
+            corpo = jogador.GetComponent<Rigidbody2D>();
+            corpo.gravityScale = 0;
+            jogador.GetComponent<PatoController>().enabled = false;
+            foreach (QuestEnemy slime in FindObjectsByType<QuestEnemy>(FindObjectsSortMode.None))
+                slime.gameObject.SetActive(false);
+            QuestCrystal[] itens = FindObjectsByType<QuestCrystal>(FindObjectsSortMode.None);
+            foreach (QuestCrystal item in itens)
+            {
+                corpo.position = item.transform.position;
+                corpo.linearVelocity = Vector2.zero;
+                yield return new WaitForFixedUpdate();
+                yield return new WaitForFixedUpdate();
+                yield return null;
+            }
+            Exigir(QuestSession.Atual.Coletados == QuestSession.Atual.totalItens, "Coleta fisica completa da fase " + numero);
+            QuestSession.Atual.Portal();
+            yield return new WaitForSeconds(.2f);
+        }
+        Exigir(SceneManager.GetActiveScene().name == "Final" && QuestSession.Venceu, "Vitoria apos duas fases");
+        Exigir(QuestSession.Pontos >= 3600, "Pontuacao dos 36 cristais");
+        QuestSession.NovoJogo();
+        yield return new WaitForSeconds(.2f);
+        Exigir(QuestSession.Vidas == 3 && QuestSession.Pontos == 0, "Reinicio limpa vidas e pontos");
+        QuestSession.Atual.PerderVida();
+        QuestSession.Atual.PerderVida();
+        QuestSession.Atual.PerderVida();
+        yield return new WaitForSeconds(.2f);
+        Exigir(SceneManager.GetActiveScene().name == "Final" && !QuestSession.Venceu, "Derrota ao zerar vidas");
+        Debug.Log("QUEST_PLAYTEST_OK");
+        UnityEditor.EditorApplication.Exit(0);
+    }
+
+    private void Exigir(bool condicao, string mensagem)
+    {
+        if (!condicao)
+        {
+            Debug.LogError("QUEST_PLAYTEST_FAILED: " + mensagem);
+            UnityEditor.EditorApplication.Exit(1);
+            throw new InvalidOperationException(mensagem);
+        }
+        Debug.Log("QUEST_CHECK_OK: " + mensagem);
+    }
+
+    private void Erro(string mensagem, string pilha, LogType tipo)
+    {
+        if (tipo == LogType.Exception && !pilha.Contains("UnityEditor.Search."))
+        {
+            File.AppendAllText(Path.GetFullPath(Application.dataPath + "/../../../work/playtest-exceptions.txt"), mensagem + "\n" + pilha + "\n");
+            UnityEditor.EditorApplication.delayCall += () => UnityEditor.EditorApplication.Exit(1);
+        }
+    }
+
+    private void Capturar(string nome)
+    {
+        Camera camera = Camera.main;
+        RenderTexture destino = new RenderTexture(1280, 720, 24);
+        RenderTexture anterior = RenderTexture.active;
+        camera.targetTexture = destino;
+        camera.Render();
+        RenderTexture.active = destino;
+        Texture2D imagem = new Texture2D(1280, 720, TextureFormat.RGB24, false);
+        imagem.ReadPixels(new Rect(0, 0, 1280, 720), 0, 0);
+        imagem.Apply();
+        string pasta = Path.GetFullPath(Application.dataPath + "/../../../outputs");
+        Directory.CreateDirectory(pasta);
+        File.WriteAllBytes(Path.Combine(pasta, nome), imagem.EncodeToPNG());
+        camera.targetTexture = null;
+        RenderTexture.active = anterior;
+        Destroy(destino);
+        Destroy(imagem);
+    }
+}
+#endif
