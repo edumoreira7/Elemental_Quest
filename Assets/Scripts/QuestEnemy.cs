@@ -31,6 +31,7 @@ public class QuestEnemy : MonoBehaviour
     private bool movendo = true;
     private Collider2D colisor;
     private Collider2D colisorJogador;
+    private readonly RaycastHit2D[] obstaculos = new RaycastHit2D[16];
 
     void Awake()
     {
@@ -74,7 +75,7 @@ public class QuestEnemy : MonoBehaviour
                     Instantiate(prefabDisparo, posicao, Quaternion.identity).GetComponent<QuestEnemyShot>().Inicializar(direcao);
                 }
                 else if (jogador != null && Mathf.Abs(jogador.transform.position.x - transform.position.x) < 1.6f
-                    && Mathf.Abs(jogador.transform.position.y - transform.position.y) < 1.6f)
+                    && Mathf.Abs(jogador.transform.position.y - transform.position.y) < 1.6f && CaminhoLivre())
                     jogador.Ferir();
             }
         }
@@ -97,7 +98,7 @@ public class QuestEnemy : MonoBehaviour
         if (jogador != null && Time.time >= proximoAtaque
             && Mathf.Abs(jogador.transform.position.x - corpo.position.x) < alcance
             && Mathf.Abs(jogador.transform.position.y - corpo.position.y) < 1.6f
-            && (tipo != Tipo.Guardiao || MesmoTerreno(out _)))
+            && (tipo != Tipo.Guardiao || MesmoTerreno(out _)) && CaminhoLivre())
         {
             direcao = jogador.transform.position.x < corpo.position.x ? -1f : 1f;
             ataqueInicio = Time.time;
@@ -157,8 +158,35 @@ public class QuestEnemy : MonoBehaviour
 
     private void Mover(float posicaoX)
     {
+        float deslocamento = posicaoX - corpo.position.x;
+        if (Mathf.Abs(deslocamento) > .0001f)
+        {
+            float sentido = Mathf.Sign(deslocamento);
+            Bounds limites = colisor.bounds;
+            Vector2 tamanho = new Vector2(Mathf.Max(.01f, limites.size.x - .02f), Mathf.Max(.01f, limites.size.y - .04f));
+            ContactFilter2D filtro = new ContactFilter2D();
+            filtro.SetLayerMask(1 << 3);
+            filtro.useTriggers = false;
+            int quantidade = Physics2D.BoxCast(limites.center, tamanho, 0, new Vector2(sentido, 0), filtro, obstaculos, Mathf.Abs(deslocamento) + .03f);
+            float permitido = Mathf.Abs(deslocamento);
+            for (int indice = 0; indice < quantidade; indice++)
+            {
+                if (obstaculos[indice].collider != colisor && obstaculos[indice].normal.x * sentido < -.5f)
+                    permitido = Mathf.Min(permitido, Mathf.Max(0, obstaculos[indice].distance - .03f));
+            }
+            if (permitido < Mathf.Abs(deslocamento) && tipo != Tipo.Guardiao)
+                direcao = -sentido;
+            posicaoX = corpo.position.x + sentido * permitido;
+        }
         movendo = Mathf.Abs(posicaoX - corpo.position.x) > .0001f;
         corpo.MovePosition(new Vector2(posicaoX, corpo.position.y));
+    }
+
+    private bool CaminhoLivre()
+    {
+        if (colisorJogador == null)
+            return false;
+        return Physics2D.Linecast(colisor.bounds.center, colisorJogador.bounds.center, 1 << 3).collider == null;
     }
 
     void OnTriggerEnter2D(Collider2D outro)
@@ -190,7 +218,7 @@ public class QuestEnemy : MonoBehaviour
     void TocarJogador(Collider2D outro)
     {
         QuestPlayer jogador = outro.GetComponent<QuestPlayer>();
-        if (!derrotado && jogador != null)
+        if (!derrotado && jogador != null && CaminhoLivre())
             jogador.Ferir();
     }
 

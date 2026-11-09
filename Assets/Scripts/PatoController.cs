@@ -29,6 +29,7 @@ public class PatoController : MonoBehaviour
     private bool olhandoDireita = true;
 
     private string animacaoAtual = "";
+    private QuestElementPowers elementos;
 
     void Awake()
     {
@@ -36,6 +37,9 @@ public class PatoController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         colisorPato = GetComponent<Collider2D>();
+        elementos = GetComponent<QuestElementPowers>();
+        if (elementos == null)
+            elementos = gameObject.AddComponent<QuestElementPowers>();
     }
 
     void Update()
@@ -48,6 +52,7 @@ public class PatoController : MonoBehaviour
             raioChao,
             camadaChao
         ) != null;
+        elementos.AtualizarVoo(noChao);
 
         // Inicia o ataque.
         if (Input.GetKeyDown(KeyCode.J) && !atacando)
@@ -71,6 +76,8 @@ public class PatoController : MonoBehaviour
         spriteRenderer.flipX = !olhandoDireita;
 
         // Pulo.
+        if (Input.GetKeyDown(KeyCode.Space) && !noChao)
+            elementos.SaltarExtra(forcaPulo);
         if (Input.GetKeyDown(KeyCode.Space) && noChao)
         {
             rb.AddForce(
@@ -108,6 +115,8 @@ public class PatoController : MonoBehaviour
     public void IniciarAtaque()
     {
         if (atacando)
+            return;
+        if (prefabPoder == null || pontoDisparo == null || !elementos.Reservar())
             return;
         atacando = true;
         movimento = 0;
@@ -147,22 +156,7 @@ public class PatoController : MonoBehaviour
             posicao.x = transform.position.x - distanciaX;
         }
 
-        GameObject novoPoder = Instantiate(
-            prefabPoder,
-            posicao,
-            Quaternion.identity
-        );
-
-        ProjetilPoder projetil =
-            novoPoder.GetComponent<ProjetilPoder>();
-
-        if (projetil != null)
-        {
-            projetil.Inicializar(
-                new Vector2(direcaoX, 0f),
-                colisorPato
-            );
-        }
+        elementos.Lancar(posicao, direcaoX, prefabPoder);
     }
 
     // Chamado no fim da animacao Attack.

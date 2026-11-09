@@ -192,7 +192,8 @@ public class QuestSmokeTest : MonoBehaviour
         QuestSession.Atual.PerderVida();
         QuestSession.Atual.PerderVida();
         yield return new WaitForSeconds(.2f);
-        Exigir(SceneManager.GetActiveScene().name == "Final" && !QuestSession.Venceu, "Derrota ao zerar vidas");
+        Exigir(SceneManager.GetActiveScene().name == "Fase1" && !QuestSession.Venceu, "Zerar vidas reinicia a fase atual");
+        Exigir(QuestSession.Vidas == 3 && QuestSession.Pontos == 0 && QuestSession.Atual.Coletados == 0, "Reinicio da fase restaura vidas e coleta sem duplicar pontos");
         Debug.Log("QUEST_PLAYTEST_OK");
         UnityEditor.EditorApplication.Exit(0);
     }

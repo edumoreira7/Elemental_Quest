@@ -1,0 +1,1664 @@
+fileFormatVersion: 2
+guid: 3a5fd4bab2a60124c8467de5f22331c5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8605730967571029614
+    second: inimigoCaC_grade_0
+  - first:
+      213: 5572308209443720808
+    second: inimigoCaC_grade_1
+  - first:
+      213: 4282394435962789650
+    second: inimigoCaC_grade_2
+  - first:
+      213: -7784964182111346189
+    second: inimigoCaC_grade_3
+  - first:
+      213: -7270999999830836982
+    second: inimigoCaC_grade_4
+  - first:
+      213: 3778858736317022462
+    second: inimigoCaC_grade_5
+  - first:
+      213: -7260492220390638009
+    second: inimigoCaC_grade_6
+  - first:
+      213: -7212575863879985913
+    second: inimigoCaC_grade_7
+  - first:
+      213: -7684694268717342509
+    second: inimigoCaC_grade_8
+  - first:
+      213: 4668085138970297747
+    second: inimigoCaC_grade_9
+  - first:
+      213: 8538782638745400561
+    second: inimigoCaC_grade_10
+  - first:
+      213: -327183121503667980
+    second: inimigoCaC_grade_11
+  - first:
+      213: 1371246303206098100
+    second: inimigoCaC_grade_12
+  - first:
+      213: -7048240078103618241
+    second: inimigoCaC_grade_13
+  - first:
+      213: -2356900603760482508
+    second: inimigoCaC_grade_14
+  - first:
+      213: -6820311909961349077
+    second: inimigoCaC_grade_15
+  - first:
+      213: -8151678813389922314
+    second: inimigoCaC_grade_16
+  - first:
+      213: -4931318650342265414
+    second: inimigoCaC_grade_17
+  - first:
+      213: -1093082549364755790
+    second: inimigoCaC_grade_18
+  - first:
+      213: -4411345627646679254
+    second: inimigoCaC_grade_19
+  - first:
+      213: -1556506959864731798
+    second: inimigoCaC_grade_20
+  - first:
+      213: -1493965196441458669
+    second: inimigoCaC_grade_21
+  - first:
+      213: -5347596050330836234
+    second: inimigoCaC_grade_22
+  - first:
+      213: -8914114667761197165
+    second: inimigoCaC_grade_23
+  - first:
+      213: -7225691639722622421
+    second: inimigoCaC_grade_24
+  - first:
+      213: 6928549173252932434
+    second: inimigoCaC_grade_25
+  - first:
+      213: 7852291072749557415
+    second: inimigoCaC_grade_26
+  - first:
+      213: 5834240091487898417
+    second: inimigoCaC_grade_27
+  - first:
+      213: 7938410506416331511
+    second: inimigoCaC_grade_28
+  - first:
+      213: -3168457727437789880
+    second: inimigoCaC_grade_29
+  - first:
+      213: 6289815786197191301
+    second: inimigoCaC_grade_30
+  - first:
+      213: 3862544982925957163
+    second: inimigoCaC_grade_31
+  - first:
+      213: -7028022650139824557
+    second: inimigoCaC_grade_32
+  - first:
+      213: 899749413577799129
+    second: inimigoCaC_grade_33
+  - first:
+      213: -1989692763458957638
+    second: inimigoCaC_grade_34
+  - first:
+      213: 1130374869713971180
+    second: inimigoCaC_grade_35
+  - first:
+      213: 1174576500754711278
+    second: inimigoCaC_grade_36
+  - first:
+      213: 3183052303706793298
+    second: inimigoCaC_grade_37
+  - first:
+      213: 9006306802184088695
+    second: inimigoCaC_grade_38
+  - first:
+      213: 6276582031627246459
+    second: inimigoCaC_grade_39
+  - first:
+      213: -4025520293534891654
+    second: inimigoCaC_grade_40
+  - first:
+      213: 3584644189098461692
+    second: inimigoCaC_grade_41
+  - first:
+      213: -388535494810912098
+    second: inimigoCaC_grade_42
+  - first:
+      213: -3127292346584975905
+    second: inimigoCaC_grade_43
+  - first:
+      213: 7043284252770211873
+    second: inimigoCaC_grade_44
+  - first:
+      213: 5066361078954985681
+    second: inimigoCaC_grade_45
+  - first:
+      213: -7761289867837271118
+    second: inimigoCaC_grade_46
+  - first:
+      213: -6970207493471814576
+    second: inimigoCaC_grade_47
+  - first:
+      213: 7005300739012737806
+    second: inimigoCaC_grade_48
+  - first:
+      213: -7786549274894819819
+    second: inimigoCaC_grade_49
+  - first:
+      213: 7720972105299574785
+    second: inimigoCaC_grade_50
+  - first:
+      213: -4794592032068619275
+    second: inimigoCaC_grade_51
+  - first:
+      213: 7691886655568735226
+    second: inimigoCaC_grade_52
+  - first:
+      213: 6681067585619661294
+    second: inimigoCaC_grade_53
+  - first:
+      213: 1027352338888455873
+    second: inimigoCaC_grade_54
+  - first:
+      213: -1728840202129893616
+    second: inimigoCaC_grade_55
+  - first:
+      213: -5029452001546282990
+    second: inimigoCaC_grade_56
+  - first:
+      213: 7303793043793459802
+    second: inimigoCaC_grade_57
+  - first:
+      213: 2266124154414993329
+    second: inimigoCaC_grade_58
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: inimigoCaC_grade_0
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 812
+        width: 296
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6e56aa48b2bd6770800000000000000
+      internalID: 8605730967571029614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_1
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 812
+        width: 292
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86ec2ea0bc0d45d40800000000000000
+      internalID: 5572308209443720808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_2
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 978
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21fdba7ec0f1e6b30800000000000000
+      internalID: 4282394435962789650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_3
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 812
+        width: 265
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f12d18a25046f390800000000000000
+      internalID: -7784964182111346189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_4
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 812
+        width: 286
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a09b7380608381b90800000000000000
+      internalID: -7270999999830836982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_5
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 812
+        width: 296
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef0ce8adff3317430800000000000000
+      internalID: 3778858736317022462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_6
+      rect:
+        serializedVersion: 2
+        x: 1963
+        y: 813
+        width: 298
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74ef0251bcc8d3b90800000000000000
+      internalID: -7260492220390638009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_7
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 950
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70590e53778c7eb90800000000000000
+      internalID: -7212575863879985913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_8
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 832
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d06f91274b7a5590800000000000000
+      internalID: -7684694268717342509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_9
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 812
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 395ca9983be58c040800000000000000
+      internalID: 4668085138970297747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_10
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 439
+        width: 296
+        height: 285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f431bcc199df7670800000000000000
+      internalID: 8538782638745400561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_11
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 695
+        width: 35
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f8354a3fac957bf0800000000000000
+      internalID: -327183121503667980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_12
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 665
+        width: 43
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b4ca226f35a70310800000000000000
+      internalID: 1371246303206098100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_13
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 695
+        width: 70
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3d56fcfdfe9f2e90800000000000000
+      internalID: -7048240078103618241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_14
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 431
+        width: 298
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 437e3f5636b9a4fd0800000000000000
+      internalID: -2356900603760482508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_15
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 695
+        width: 66
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b28436514726951a0800000000000000
+      internalID: -6820311909961349077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_16
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 704
+        width: 22
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ffd0d40f4b6fde80800000000000000
+      internalID: -8151678813389922314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_17
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 685
+        width: 91
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abd271490df609bb0800000000000000
+      internalID: -4931318650342265414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_18
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 663
+        width: 106
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b27fe6763794d0f0800000000000000
+      internalID: -1093082549364755790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_19
+      rect:
+        serializedVersion: 2
+        x: 1195
+        y: 267
+        width: 296
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a27a5a22680c7c2c0800000000000000
+      internalID: -4411345627646679254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_20
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 704
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a67e6deaa2d266ae0800000000000000
+      internalID: -1556506959864731798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_21
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 695
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3186f47b19e544be0800000000000000
+      internalID: -1493965196441458669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_22
+      rect:
+        serializedVersion: 2
+        x: 1589
+        y: 666
+        width: 151
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f2afb999b589c5b0800000000000000
+      internalID: -5347596050330836234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_23
+      rect:
+        serializedVersion: 2
+        x: 1963
+        y: 431
+        width: 298
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39f9efc40f3ba4480800000000000000
+      internalID: -8914114667761197165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_24
+      rect:
+        serializedVersion: 2
+        x: 2026
+        y: 681
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b22c2ddacbf29bb90800000000000000
+      internalID: -7225691639722622421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_25
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 429
+        width: 298
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 253419893c6272060800000000000000
+      internalID: 6928549173252932434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_26
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 673
+        width: 49
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a65530a021f8fc60800000000000000
+      internalID: 7852291072749557415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_27
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 655
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13b8a7bb37267f050800000000000000
+      internalID: 5834240091487898417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_28
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 449
+        width: 280
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fa9c2ccb46ea2e60800000000000000
+      internalID: 7938410506416331511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_29
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 558
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 845aa3eeb706704d0800000000000000
+      internalID: -3168457727437789880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_30
+      rect:
+        serializedVersion: 2
+        x: 1859
+        y: 521
+        width: 18
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58a8de6f12ae94750800000000000000
+      internalID: 6289815786197191301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_31
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 526
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b28d44482348a9530800000000000000
+      internalID: 3862544982925957163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_32
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 510
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35e2401c2a2777e90800000000000000
+      internalID: -7028022650139824557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_33
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 480
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d5bb27135d8c7c00800000000000000
+      internalID: 899749413577799129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_34
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 453
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abe0dd539f03364e0800000000000000
+      internalID: -1989692763458957638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_35
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 453
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce7645c74f5efaf00800000000000000
+      internalID: 1130374869713971180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_36
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 433
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee28101ba1fec4010800000000000000
+      internalID: 1174576500754711278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_37
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 445
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 255aee7a4397c2c20800000000000000
+      internalID: 3183052303706793298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_38
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 437
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77ced52b154dcfc70800000000000000
+      internalID: 9006306802184088695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_39
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 319
+        width: 159
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7bddbe5a16ea1750800000000000000
+      internalID: 6276582031627246459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_40
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 43
+        width: 297
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a710ab30f9a7228c0800000000000000
+      internalID: -4025520293534891654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_41
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 61
+        width: 268
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf9c161d5e63fb130800000000000000
+      internalID: 3584644189098461692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_42
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 317
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9a3a29a605ab9af0800000000000000
+      internalID: -388535494810912098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_43
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 43
+        width: 261
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd5310d0e20a994d0800000000000000
+      internalID: -3127292346584975905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_44
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 319
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 128987206b5ceb160800000000000000
+      internalID: 7043284252770211873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_45
+      rect:
+        serializedVersion: 2
+        x: 1789
+        y: 253
+        width: 78
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d80afefe845f4640800000000000000
+      internalID: 5066361078954985681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_46
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 308
+        width: 25
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b398bc7cfb5a4490800000000000000
+      internalID: -7761289867837271118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_47
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 290
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05cb8d4e639d44f90800000000000000
+      internalID: -6970207493471814576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_48
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 253
+        width: 19
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0bb2ad08e3d73160800000000000000
+      internalID: 7005300739012737806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_49
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 284
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51e91db70be90f390800000000000000
+      internalID: -7786549274894819819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_50
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 277
+        width: 19
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 100c419e837662b60800000000000000
+      internalID: 7720972105299574785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_51
+      rect:
+        serializedVersion: 2
+        x: 1965
+        y: 43
+        width: 296
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f3b1ad13ff267db0800000000000000
+      internalID: -4794592032068619275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_52
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 253
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afbedbde8221fba60800000000000000
+      internalID: 7691886655568735226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_53
+      rect:
+        serializedVersion: 2
+        x: 1579
+        y: 101
+        width: 288
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee19c31429be7bc50800000000000000
+      internalID: 6681067585619661294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_54
+      rect:
+        serializedVersion: 2
+        x: 1714
+        y: 239
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c6fc925283e14e00800000000000000
+      internalID: 1027352338888455873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_55
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 124
+        width: 18
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01712a6fefce108e0800000000000000
+      internalID: -1728840202129893616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_56
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 147
+        width: 7
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 218d4f04d0cc33ab0800000000000000
+      internalID: -5029452001546282990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_57
+      rect:
+        serializedVersion: 2
+        x: 1195
+        y: 43
+        width: 288
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5a374083194c5560800000000000000
+      internalID: 7303793043793459802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: inimigoCaC_grade_58
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 66
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bf86d879e3e27f10800000000000000
+      internalID: 2266124154414993329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      inimigoCaC_grade_0: 8605730967571029614
+      inimigoCaC_grade_1: 5572308209443720808
+      inimigoCaC_grade_10: 8538782638745400561
+      inimigoCaC_grade_11: -327183121503667980
+      inimigoCaC_grade_12: 1371246303206098100
+      inimigoCaC_grade_13: -7048240078103618241
+      inimigoCaC_grade_14: -2356900603760482508
+      inimigoCaC_grade_15: -6820311909961349077
+      inimigoCaC_grade_16: -8151678813389922314
+      inimigoCaC_grade_17: -4931318650342265414
+      inimigoCaC_grade_18: -1093082549364755790
+      inimigoCaC_grade_19: -4411345627646679254
+      inimigoCaC_grade_2: 4282394435962789650
+      inimigoCaC_grade_20: -1556506959864731798
+      inimigoCaC_grade_21: -1493965196441458669
+      inimigoCaC_grade_22: -5347596050330836234
+      inimigoCaC_grade_23: -8914114667761197165
+      inimigoCaC_grade_24: -7225691639722622421
+      inimigoCaC_grade_25: 6928549173252932434
+      inimigoCaC_grade_26: 7852291072749557415
+      inimigoCaC_grade_27: 5834240091487898417
+      inimigoCaC_grade_28: 7938410506416331511
+      inimigoCaC_grade_29: -3168457727437789880
+      inimigoCaC_grade_3: -7784964182111346189
+      inimigoCaC_grade_30: 6289815786197191301
+      inimigoCaC_grade_31: 3862544982925957163
+      inimigoCaC_grade_32: -7028022650139824557
+      inimigoCaC_grade_33: 899749413577799129
+      inimigoCaC_grade_34: -1989692763458957638
+      inimigoCaC_grade_35: 1130374869713971180
+      inimigoCaC_grade_36: 1174576500754711278
+      inimigoCaC_grade_37: 3183052303706793298
+      inimigoCaC_grade_38: 9006306802184088695
+      inimigoCaC_grade_39: 6276582031627246459
+      inimigoCaC_grade_4: -7270999999830836982
+      inimigoCaC_grade_40: -4025520293534891654
+      inimigoCaC_grade_41: 3584644189098461692
+      inimigoCaC_grade_42: -388535494810912098
+      inimigoCaC_grade_43: -3127292346584975905
+      inimigoCaC_grade_44: 7043284252770211873
+      inimigoCaC_grade_45: 5066361078954985681
+      inimigoCaC_grade_46: -7761289867837271118
+      inimigoCaC_grade_47: -6970207493471814576
+      inimigoCaC_grade_48: 7005300739012737806
+      inimigoCaC_grade_49: -7786549274894819819
+      inimigoCaC_grade_5: 3778858736317022462
+      inimigoCaC_grade_50: 7720972105299574785
+      inimigoCaC_grade_51: -4794592032068619275
+      inimigoCaC_grade_52: 7691886655568735226
+      inimigoCaC_grade_53: 6681067585619661294
+      inimigoCaC_grade_54: 1027352338888455873
+      inimigoCaC_grade_55: -1728840202129893616
+      inimigoCaC_grade_56: -5029452001546282990
+      inimigoCaC_grade_57: 7303793043793459802
+      inimigoCaC_grade_58: 2266124154414993329
+      inimigoCaC_grade_6: -7260492220390638009
+      inimigoCaC_grade_7: -7212575863879985913
+      inimigoCaC_grade_8: -7684694268717342509
+      inimigoCaC_grade_9: 4668085138970297747
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

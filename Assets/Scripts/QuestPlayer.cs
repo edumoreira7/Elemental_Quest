@@ -33,4 +33,9 @@ public class QuestPlayer : MonoBehaviour
         invulneravelAte = Time.time + 1.8f;
         QuestSession.Atual.PerderVida();
     }
+
+    public void AtivarCheckpoint(Vector3 destino)
+    {
+        pontoSeguro = destino;
+    }
 }

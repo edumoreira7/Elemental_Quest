@@ -18,11 +18,15 @@ public class QuestSession : MonoBehaviour
     private GUIStyle texto;
     private GUIStyle pequeno;
     private GUIStyle botao;
+    private int pontosInicioFase;
+    private bool reiniciando;
+    private QuestElementPowers poderesHud;
 
     void Awake()
     {
         Atual = this;
         Time.timeScale = 1f;
+        pontosInicioFase = Pontos;
     }
 
     void Update()
@@ -61,6 +65,15 @@ public class QuestSession : MonoBehaviour
         avisoAte = Time.unscaledTime + 3f;
     }
 
+    public bool ColetarVida()
+    {
+        if (reiniciando || Vidas >= 3)
+            return false;
+        Vidas++;
+        Avisar("Vida recuperada!");
+        return true;
+    }
+
     public void Portal()
     {
         if (Coletados < totalItens)
@@ -79,11 +92,17 @@ public class QuestSession : MonoBehaviour
 
     public void PerderVida()
     {
+        if (reiniciando)
+            return;
         Vidas = Mathf.Max(0, Vidas - 1);
         if (Vidas == 0)
         {
+            reiniciando = true;
+            Vidas = 3;
+            Pontos = pontosInicioFase;
             Venceu = false;
-            SceneManager.LoadScene("Final");
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(gameObject.scene.name);
         }
     }
 
@@ -120,7 +139,7 @@ public class QuestSession : MonoBehaviour
             GUI.Label(new Rect(280, 90, 720, 75), "ELEMENTAL QUEST", titulo);
             GUI.Label(new Rect(280, 169, 720, 36), "O caminho dos cristais", texto);
             GUI.Label(new Rect(300, 232, 680, 140), "A / D ou setas: andar     |     Shift: correr\nEspaco: pular     |     J: lancar magia\nEsc: pausar", texto);
-            GUI.Label(new Rect(310, 388, 660, 90), "Colete TODOS os cristais de cada fase e entre no portal.\nEvite os inimigos e os abismos. Voce tem 3 vidas para as duas fases.", pequeno);
+            GUI.Label(new Rect(310, 388, 660, 90), "Colete TODOS os cristais de cada fase e entre no portal.\nEvite os inimigos e os abismos. Ao acabar as vidas, a fase reinicia com 3 vidas.", pequeno);
             if (GUI.Button(new Rect(465, 513, 350, 65), "JOGAR  /  ENTER", botao))
                 NovoJogo();
             GUI.Label(new Rect(340, 601, 600, 30), "01  Jardim das Nuvens     /     02  Ruinas Esmeralda", pequeno);
@@ -138,15 +157,18 @@ public class QuestSession : MonoBehaviour
         }
         else
         {
-            Painel(new Rect(20, 18, 1240, 70));
+            Painel(new Rect(20, 18, 1240, 145));
             GUI.Label(new Rect(35, 27, 395, 50), "0" + fase + "  /  " + nomeFase, pequeno);
-            GUI.Label(new Rect(455, 27, 190, 50), "VIDAS  " + Vidas + " / 3", texto);
+            if (poderesHud == null)
+                poderesHud = FindAnyObjectByType<QuestElementPowers>();
+            if (poderesHud != null)
+                QuestHudArt.Mostrar(poderesHud);
             GUI.Label(new Rect(675, 27, 260, 50), "CRISTAIS  " + Coletados + " / " + totalItens, texto);
             GUI.Label(new Rect(960, 27, 275, 50), "PONTOS  " + Pontos.ToString("00000"), texto);
             if (Time.unscaledTime < avisoAte)
             {
-                Painel(new Rect(260, 110, 760, 56));
-                GUI.Label(new Rect(270, 117, 740, 40), aviso, pequeno);
+                Painel(new Rect(260, 175, 760, 56));
+                GUI.Label(new Rect(270, 182, 740, 40), aviso, pequeno);
             }
             if (Pausado)
             {
