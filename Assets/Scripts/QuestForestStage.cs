@@ -15,6 +15,7 @@ public class QuestForestStage : MonoBehaviour
     Camera cameraJogo;
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     static void Limpar() { Retomar=false; }
+    public static void ResetarProgresso(){Retomar=false;Destino=Vector3.zero;}
     void Start()
     {
         vida=jogador.GetComponent<QuestPlayer>(); cameraJogo=Camera.main;

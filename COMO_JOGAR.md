@@ -1,41 +1,22 @@
-# Elemental Quest
+# Como jogar Elemental Quest
 
-Abra `Assets/Scenes/Inicio.unity` e pressione Play no Unity.
+Abra a cena **Inicio** e pressione Play no Unity. Use **Jogar Aventura** para iniciar a fase principal ou **Tutorial** para aprender as mecânicas. **Controles** abre uma tela de consulta; Escape fecha essa tela. **Sair** fecha o executável; no Editor, encerra o Play.
 
-- A / D ou setas: andar.
-- Shift: correr.
-- Espaco: pular.
-- J: lancar magia.
-- Esc: pausar ou continuar.
+| Comando | Ação |
+|---|---|
+| A/D ou setas | Mover |
+| Shift esquerdo | Correr |
+| Espaço | Pular |
+| 1 / 2 / 3 / 4 | Terra / Ar / Fogo / Gelo |
+| J | Conjurar |
+| Espaço novamente, com Ar | Salto extra no ar |
+| Segurar J ao cair, com Ar | Planar por tempo limitado |
+| Escape | Pausar ou continuar |
 
-## Objetivo
+Terra cria um bloco, Ar amplia as travessias, Fogo abre raízes e Gelo congela superfícies. Mana se recupera com o tempo. Cristais orientam a exploração e dão pontos; não é necessário coletar todos para entrar na arena.
 
-Recupere os 16 cristais do Jardim das Nuvens e entre no portal para chegar as Ruinas Esmeralda. Recupere os 20 cristais restantes e entre no ultimo portal para vencer. Alguns cristais ficam sobre plataformas suspensas. E possivel voltar para buscar os que faltam. As 30 pecas do tileset foram recortadas e utilizadas em cada fase, incluindo rampas, ilhas curvas, bordas, vegetacao, flores e pedras.
+Sofrer dano reduz vida e faz piscar, sem teleporte. Queda retorna ao ponto seguro. Bandeiras salvam checkpoints durante a sessão. Zerar vidas reinicia a área e restaura a tentativa; na arena do boss, retorna à preparação em x151 da fase principal. Uma nova partida pelo menu limpa vidas, pontos e checkpoints anteriores.
 
-Cada cristal vale 100 pontos. Derrotar um inimigo com magia vale 50 pontos. O guaxinim patrulha e ataca de perto; o pato verde dispara sementes magicas; o sapo guardiao e maior e exige dois acertos. Todos possuem quadros de movimento, ataque, dano e morte retirados das cartelas fornecidas. As tres vidas sao compartilhadas entre as duas fases. Encostar em um inimigo, receber um disparo ou cair em um abismo custa uma vida. Apos sofrer dano, o pato fica temporariamente invulneravel. Uma queda reposiciona o pato no inicio da fase sem apagar os cristais coletados. Ao perder as tres vidas, aparece a tela de derrota. Reiniciar comeca uma nova partida com pontuacao zerada e tres vidas.
+O Guardião das Ruínas anuncia golpe, onda e investida. Desvie e ataque quando o núcleo abrir. São seis acertos bem aproveitados sem cura. **Terra é absorvida na batalha e cura um ponto do boss**, limitado à vida máxima; fora da arena, o bloco continua normal.
 
-## Cenas
-
-- `Inicio`: instrucoes e botao de jogar.
-- `Fase1`: Jardim das Nuvens, com 16 cristais e tres inimigos.
-- `Fase2`: Ruinas Esmeralda, com 20 cristais e quatro inimigos.
-- `Final`: vitoria ou derrota, pontuacao, reiniciar e voltar ao inicio.
-- `SampleScene`: cena original preservada para referencia.
-
-Os recortes ficam em `Assets/ElementalQuest/Recortes`. Expanda Cenario, Guaxinim, Atirador e Guardiao na janela Project para reutiliza-los. O arquivo CATALOGO.txt lista os nomes. Os PNGs originais e seus recortes manuais foram preservados. Rampas e ilhas usam colisores poligonais obtidos do contorno da imagem; plantas e pedras decorativas nao bloqueiam o caminho. O parallax acompanha somente o deslocamento horizontal da camera: se ela parar nos limites da fase, o fundo tambem para, mesmo que o pato continue andando. O jogador reutiliza o controlador, os sprites, as animacoes e o projetil originais.
-
-## Edicao
-
-Cada fase usa tres camadas dos fundos novos: ceu, montanhas e floresta na primeira; ceu de entardecer, montanhas e ruinas na segunda. As camadas mais distantes se deslocam mais devagar. As copias alternam espelhamento horizontal para encaixar as bordas da mesma imagem. O menu `Elemental Quest > Atualizar apenas os fundos` troca somente os fundos de Fase1 e Fase2, mantendo plataformas, itens e inimigos nas posicoes existentes. Os assets usados ficam em `Assets/ElementalQuest/Fundos`.
-
-O guaxinim usa um multiplicador de velocidade de 1,7 (cerca de 70% mais rapido). O sapo guardiao detecta o jogador a ate 8 unidades e persegue a 2,2 unidades por segundo quando ambos estao no mesmo trecho continuo de chao. Ele respeita as bordas, para para atacar e retorna gradualmente a sua patrulha quando perde o alcance. Esses valores ficam no componente QuestEnemy. O guardiao nao pula abismos nem sobe em plataformas separadas.
-
-As fases contem objetos editaveis na Hierarchy: ilhas, plataformas, cristais, inimigos e portal. Ao adicionar ou remover cristais, atualize `Total Itens` no objeto `Regras, vidas e pontuacao`. Os limites de patrulha, o tipo e as vidas de cada inimigo ficam no componente `QuestEnemy`.
-
-O menu `Elemental Quest > Criar ou reconstruir aventura` recria as quatro cenas e sobrescreve edicoes feitas nelas. Use somente para voltar ao layout inicial desta aventura.
-
-## Repositorio
-
-O projeto agora fica no repositorio `edumoreira7/Elemental_Quest`. A origem foi preservada em `Jogos Digitais/Plataforma`, incluindo as edicoes locais existentes no momento da copia. O historico anterior continua no repositorio `edumoreira7/Jogos-Digitais`, na branch `elemental-quest/duas-fases`; a branch `backup/plataforma-2026-10-16` guarda o estado anterior a esta aventura.
-
-Os PNGs sem referencias foram arquivados, junto com seus arquivos `.meta`, em `Documents/sprites jogo/Elemental Quest`. As cartelas e os fundos originais usados pelos menus de edicao continuam em `Assets`.
+Ao concluir o tutorial, Enter ou Jogar Aventura inicia a fase principal. Ao vencer o boss, entre no portal liberado para concluir a fase e retornar ao menu. O tutorial é opcional; o menu não redireciona para as antigas fases de laboratório.

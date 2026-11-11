@@ -15,181 +15,30 @@ public class QuestSession : MonoBehaviour
     public static QuestSession Atual;
     public int Coletados { get; private set; }
     public bool Pausado { get; private set; }
-    private string aviso;
-    private float avisoAte;
-    private GUIStyle titulo;
-    private GUIStyle texto;
-    private GUIStyle pequeno;
-    private GUIStyle botao;
-    private int pontosInicioFase;
-    private bool reiniciando;
-    private QuestElementPowers poderesHud;
-
-    void Awake()
-    {
-        Atual = this;
-        Time.timeScale = 1f;
-        pontosInicioFase = Pontos;
-    }
-
-    void Update()
-    {
-        if (fase > 0 && fase < 3 && Input.GetKeyDown(KeyCode.Escape))
-        {
-            Pausado = !Pausado;
-            Time.timeScale = Pausado ? 0f : 1f;
-        }
-        if (fase == 0 && Input.GetKeyDown(KeyCode.Return))
-            NovoJogo();
-        if (fase == 3 && Input.GetKeyDown(KeyCode.Return))
-            NovoJogo();
-    }
-
-    public static void NovoJogo()
-    {
-        Vidas = 3;
-        Pontos = 0;
-        Venceu = false;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Fase1");
-    }
-
-    public void Coletar()
-    {
-        Coletados++;
-        Pontos += 100;
-        if (avisarColetaCompleta && Coletados == totalItens)
-            Avisar("Todos os cristais! Siga ate o portal.");
-    }
-
-    public void Avisar(string mensagem)
-    {
-        aviso = mensagem;
-        avisoAte = Time.unscaledTime + 3f;
-    }
-
-    public bool ColetarVida()
-    {
-        if (reiniciando || Vidas >= 3)
-            return false;
-        Vidas++;
-        Avisar("Vida recuperada!");
-        return true;
-    }
-
-    public void Portal()
-    {
-        if (tutorialFinal != null)
-        {
-            tutorialFinal.TentarConcluir();
-            return;
-        }
-        if (Coletados < totalItens)
-        {
-            Avisar("Faltam " + (totalItens - Coletados) + " cristais. Explore as plataformas!");
-            return;
-        }
-        if (fase == 1)
-            SceneManager.LoadScene("Fase2");
-        else
-        {
-            Venceu = true;
-            SceneManager.LoadScene("Final");
-        }
-    }
-
-    public void PerderVida()
-    {
-        if (reiniciando)
-            return;
-        Vidas = Mathf.Max(0, Vidas - 1);
-        if (Vidas == 0)
-        {
-            reiniciando = true;
-            Vidas = 3;
-            Pontos = pontosInicioFase;
-            Venceu = false;
-            Time.timeScale = 1f;
-            if (bossArena != null) bossArena.RetornarAposDerrota();
-            else SceneManager.LoadScene(gameObject.scene.name);
-        }
-    }
-
-    void Estilos()
-    {
-        if (titulo != null)
-            return;
-        titulo = new GUIStyle(GUI.skin.label) { fontSize = 54, fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter };
-        titulo.normal.textColor = new Color(1f, .91f, .62f);
-        texto = new GUIStyle(GUI.skin.label) { fontSize = 24, alignment = TextAnchor.MiddleCenter, wordWrap = true };
-        texto.normal.textColor = Color.white;
-        pequeno = new GUIStyle(texto) { fontSize = 18 };
-        botao = new GUIStyle(GUI.skin.button) { fontSize = 24, fontStyle = FontStyle.Bold };
-        botao.normal.textColor = new Color(.08f, .16f, .23f);
-    }
-
-    void Painel(Rect area)
-    {
-        Color anterior = GUI.color;
-        GUI.color = new Color(.025f, .07f, .14f, .93f);
-        GUI.DrawTexture(area, Texture2D.whiteTexture);
-        GUI.color = anterior;
-    }
-
+    string aviso;float avisoAte;int pontosInicioFase;bool reiniciando;
+    GUIStyle texto,pequeno,titulo,botao;
+    QuestElementPowers poderesHud;
+    void Awake(){Atual=this;Time.timeScale=1;pontosInicioFase=Pontos;}
+    void Update(){if(Input.GetKeyDown(KeyCode.Escape)){Pausado=!Pausado;Time.timeScale=Pausado?0:1;}}
+    public static void PrepararNovaPartida(){Vidas=3;Pontos=0;Venceu=false;Time.timeScale=1;QuestForestStage.ResetarProgresso();QuestTutorialFinal.ReiniciarProgresso();}
+    public static void NovoJogo(){PrepararNovaPartida();SceneManager.LoadScene("FasePrincipal");}
+    public static void IniciarTutorial(){PrepararNovaPartida();SceneManager.LoadScene("Tutorial");}
+    public static void VoltarAoMenu(){Time.timeScale=1;SceneManager.LoadScene("Inicio");}
+    public void Coletar(){Coletados++;Pontos+=100;if(avisarColetaCompleta&&Coletados==totalItens)Avisar("Cristais coletados!");}
+    public void Avisar(string mensagem){aviso=mensagem;avisoAte=Time.unscaledTime+3;}
+    public bool ColetarVida(){if(reiniciando||Vidas>=3)return false;Vidas++;Avisar("Vida recuperada!");return true;}
+    public void Portal(){if(tutorialFinal!=null)tutorialFinal.TentarConcluir();else Avisar("Siga ate a saida da area.");}
+    public void PerderVida(){if(reiniciando)return;Vidas=Mathf.Max(0,Vidas-1);if(Vidas==0){reiniciando=true;Vidas=3;Pontos=pontosInicioFase;Venceu=false;Time.timeScale=1;if(bossArena!=null)bossArena.RetornarAposDerrota();else SceneManager.LoadScene(gameObject.scene.name);}}
+    void Painel(Rect r){var cor=GUI.color;GUI.color=new Color(.025f,.07f,.14f,.93f);GUI.DrawTexture(r,Texture2D.whiteTexture);GUI.color=cor;}
     void OnGUI()
     {
-        Estilos();
-        Matrix4x4 matrizAnterior = GUI.matrix;
-        float escala = Mathf.Min(Screen.width / 1280f, Screen.height / 720f);
-        GUI.matrix = Matrix4x4.TRS(new Vector3((Screen.width - 1280 * escala) / 2, (Screen.height - 720 * escala) / 2), Quaternion.identity, Vector3.one * escala);
-        if (fase == 0)
-        {
-            Painel(new Rect(220, 64, 840, 592));
-            GUI.Label(new Rect(280, 90, 720, 75), "ELEMENTAL QUEST", titulo);
-            GUI.Label(new Rect(280, 169, 720, 36), "O caminho dos cristais", texto);
-            GUI.Label(new Rect(300, 232, 680, 140), "A / D ou setas: andar     |     Shift: correr\nEspaco: pular     |     J: lancar magia\nEsc: pausar", texto);
-            GUI.Label(new Rect(310, 388, 660, 90), "Colete TODOS os cristais de cada fase e entre no portal.\nEvite os inimigos e os abismos. Ao acabar as vidas, a fase reinicia com 3 vidas.", pequeno);
-            if (GUI.Button(new Rect(465, 513, 350, 65), "JOGAR  /  ENTER", botao))
-                NovoJogo();
-            GUI.Label(new Rect(340, 601, 600, 30), "01  Jardim das Nuvens     /     02  Ruinas Esmeralda", pequeno);
-        }
-        else if (fase == 3)
-        {
-            Painel(new Rect(250, 140, 780, 450));
-            GUI.Label(new Rect(280, 175, 720, 80), Venceu ? "VITORIA!" : "FIM DE JOGO", titulo);
-            GUI.Label(new Rect(320, 275, 640, 80), Venceu ? "Todos os cristais foram recuperados!\nO vale esta seguro outra vez." : "As vidas acabaram.\nO vale espera pela sua proxima aventura.", texto);
-            GUI.Label(new Rect(400, 375, 480, 40), "PONTUACAO   " + Pontos.ToString("00000"), texto);
-            if (GUI.Button(new Rect(390, 452, 270, 65), "REINICIAR", botao))
-                NovoJogo();
-            if (GUI.Button(new Rect(680, 452, 210, 65), "INICIO", botao))
-                SceneManager.LoadScene("Inicio");
-        }
-        else
-        {
-            Painel(new Rect(20, 18, 1240, 145));
-            GUI.Label(new Rect(35, 27, 395, 50), "0" + fase + "  /  " + nomeFase, pequeno);
-            if (poderesHud == null)
-                poderesHud = FindAnyObjectByType<QuestElementPowers>();
-            if (poderesHud != null)
-                QuestHudArt.Mostrar(poderesHud);
-            GUI.Label(new Rect(675, 27, 260, 50), "CRISTAIS  " + Coletados + " / " + totalItens, texto);
-            GUI.Label(new Rect(960, 27, 275, 50), "PONTOS  " + Pontos.ToString("00000"), texto);
-            if (Time.unscaledTime < avisoAte)
-            {
-                Painel(new Rect(260, 175, 760, 56));
-                GUI.Label(new Rect(270, 182, 740, 40), aviso, pequeno);
-            }
-            if (Pausado)
-            {
-                Painel(new Rect(400, 240, 480, 255));
-                GUI.Label(new Rect(430, 265, 420, 70), "PAUSA", titulo);
-                if (GUI.Button(new Rect(460, 365, 360, 65), "CONTINUAR", botao))
-                {
-                    Pausado = false;
-                    Time.timeScale = 1f;
-                }
-            }
-        }
-        GUI.matrix = matrizAnterior;
+        if(texto==null){texto=new GUIStyle(GUI.skin.label){fontSize=24,alignment=TextAnchor.MiddleCenter};pequeno=new GUIStyle(texto){fontSize=18};titulo=new GUIStyle(texto){fontSize=42,fontStyle=FontStyle.Bold};botao=new GUIStyle(GUI.skin.button){fontSize=22};}
+        var anterior=GUI.matrix;float s=Mathf.Min(Screen.width/1280f,Screen.height/720f);GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*s)/2,(Screen.height-720*s)/2),Quaternion.identity,Vector3.one*s);
+        Painel(new Rect(20,18,1240,145));GUI.Label(new Rect(35,27,395,50),nomeFase,pequeno);
+        if(poderesHud==null)poderesHud=FindAnyObjectByType<QuestElementPowers>();if(poderesHud!=null)QuestHudArt.Mostrar(poderesHud);
+        GUI.Label(new Rect(675,27,260,50),bossArena==null?"CRISTAIS  "+Coletados+" / "+totalItens:"GUARDIAO",texto);GUI.Label(new Rect(960,27,275,50),"PONTOS  "+Pontos.ToString("00000"),texto);
+        if(Time.unscaledTime<avisoAte){Painel(new Rect(260,175,760,56));GUI.Label(new Rect(270,182,740,40),aviso,pequeno);}
+        if(Pausado){Painel(new Rect(400,240,480,300));GUI.Label(new Rect(430,265,420,65),"PAUSA",titulo);if(GUI.Button(new Rect(460,355,360,60),"CONTINUAR",botao)){Pausado=false;Time.timeScale=1;}if(GUI.Button(new Rect(460,433,360,52),"VOLTAR AO MENU",botao))VoltarAoMenu();}
+        GUI.matrix=anterior;
     }
 }

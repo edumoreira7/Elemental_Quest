@@ -20,6 +20,7 @@ public class QuestTutorialFinal : MonoBehaviour
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     static void ReiniciarSessao() { RetomarCheckpoint = false; }
+    public static void ReiniciarProgresso(){RetomarCheckpoint=false;}
 
     void Start()
     {
@@ -39,7 +40,7 @@ public class QuestTutorialFinal : MonoBehaviour
 
     void Update()
     {
-        if (Concluiu && Input.GetKeyDown(KeyCode.Return)) { VoltarAoMenu(); return; }
+        if (Concluiu && Input.GetKeyDown(KeyCode.Return)) { SeguirParaAventura(); return; }
         if (Concluiu || (QuestSession.Atual != null && QuestSession.Atual.Pausado)) return;
         if (inimigo != null && inimigo.vidas > 0)
         {
@@ -82,7 +83,8 @@ public class QuestTutorialFinal : MonoBehaviour
         GUI.Box(area, "");
         var estilo = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontSize = 26, wordWrap = true };
         GUI.Label(new Rect(area.x+12,area.y+8,area.width-24,100), "Tutorial concluido!\nMovimento, elementos e combate", estilo);
-        if (GUI.Button(new Rect(area.x+30,area.y+124,area.width-60,32), "Enter: voltar ao menu")) VoltarAoMenu();
+        if (GUI.Button(new Rect(area.x+18,area.y+124,(area.width-44)*.6f,32), "Jogar aventura / Enter")) SeguirParaAventura();
+        if (GUI.Button(new Rect(area.x+26+(area.width-44)*.6f,area.y+124,(area.width-44)*.4f,32), "Menu")) VoltarAoMenu();
     }
     public void VoltarAoMenu()
     {
@@ -92,4 +94,5 @@ public class QuestTutorialFinal : MonoBehaviour
         Time.timeScale = 1;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Inicio");
     }
+    public void SeguirParaAventura(){if(!Concluiu||saindo)return;saindo=true;QuestSession.NovoJogo();}
 }
