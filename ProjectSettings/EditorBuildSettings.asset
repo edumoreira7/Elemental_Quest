@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Final.unity
     guid: aeadbb4a2af62ab43801be0a45540099
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 21916a8e5f7729d45900acdea593dca3
+  - enabled: 1
+    path: Assets/Scenes/FasePrincipal.unity
+    guid: c676fe69afcdc914f9dd9645a32ae16e
+  - enabled: 1
+    path: Assets/Scenes/ArenaFloresta.unity
+    guid: 31d23b8959b44a743be4cbd59ef74759
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

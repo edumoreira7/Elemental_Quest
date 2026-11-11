@@ -10,11 +10,33 @@ public class QuestMagicArt : MonoBehaviour
     private bool repetir;
     private float fps;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void LimparCache()
+    {
+        cache.Clear();
+    }
+
     public static Sprite[] Quadros(string caminho, int quantidade = 6)
     {
         string chave = caminho + quantidade;
         if (cache.TryGetValue(chave, out Sprite[] existentes))
-            return existentes;
+        {
+            bool valido = existentes != null && existentes.Length == quantidade;
+            if (valido)
+            {
+                foreach (Sprite sprite in existentes)
+                {
+                    if (sprite == null || sprite.texture == null)
+                    {
+                        valido = false;
+                        break;
+                    }
+                }
+            }
+            if (valido)
+                return existentes;
+            cache.Remove(chave);
+        }
         Texture2D textura = Resources.Load<Texture2D>("ElementalMagic/" + caminho);
         if (textura == null)
             return new Sprite[0];

@@ -6,6 +6,9 @@ public class QuestSession : MonoBehaviour
     public int fase;
     public int totalItens;
     public string nomeFase;
+    public bool avisarColetaCompleta = true;
+    public QuestTutorialFinal tutorialFinal;
+    public QuestBossArena bossArena;
     public static int Vidas = 3;
     public static int Pontos;
     public static bool Venceu;
@@ -55,7 +58,7 @@ public class QuestSession : MonoBehaviour
     {
         Coletados++;
         Pontos += 100;
-        if (Coletados == totalItens)
+        if (avisarColetaCompleta && Coletados == totalItens)
             Avisar("Todos os cristais! Siga ate o portal.");
     }
 
@@ -76,6 +79,11 @@ public class QuestSession : MonoBehaviour
 
     public void Portal()
     {
+        if (tutorialFinal != null)
+        {
+            tutorialFinal.TentarConcluir();
+            return;
+        }
         if (Coletados < totalItens)
         {
             Avisar("Faltam " + (totalItens - Coletados) + " cristais. Explore as plataformas!");
@@ -102,7 +110,8 @@ public class QuestSession : MonoBehaviour
             Pontos = pontosInicioFase;
             Venceu = false;
             Time.timeScale = 1f;
-            SceneManager.LoadScene(gameObject.scene.name);
+            if (bossArena != null) bossArena.RetornarAposDerrota();
+            else SceneManager.LoadScene(gameObject.scene.name);
         }
     }
 

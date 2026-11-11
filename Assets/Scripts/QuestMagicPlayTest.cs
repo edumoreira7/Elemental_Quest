@@ -25,6 +25,12 @@ public class QuestMagicPlayTest : MonoBehaviour
     private IEnumerator Start()
     {
         Application.logMessageReceived += Falha;
+        Sprite[] icones = QuestMagicArt.Quadros("Tutorial/Interface/05-Coracao-Cheio", 1);
+        Exigir(icones.Length == 1 && icones[0] != null, "Sprite do HUD carregado");
+        Destroy(icones[0]);
+        yield return null;
+        Sprite[] recuperados = QuestMagicArt.Quadros("Tutorial/Interface/05-Coracao-Cheio", 1);
+        Exigir(recuperados.Length == 1 && recuperados[0] != null && recuperados[0].rect.width > 0, "Cache reconstrui sprite destruido antes de acessar rect");
         QuestSession.NovoJogo();
         yield return new WaitForSeconds(.5f);
         QuestPlayer jogador = FindAnyObjectByType<QuestPlayer>();
@@ -38,6 +44,9 @@ public class QuestMagicPlayTest : MonoBehaviour
         Exigir(poderes.Mana == 75f, "Terra consome 25 mana");
         poderes.Selecionar(QuestElementPowers.Elemento.Gelo);
         Exigir(poderes.Atual == QuestElementPowers.Elemento.Terra, "Troca nao altera magia reservada");
+        yield return new WaitForSeconds(.55f);
+        GameObject formando = GameObject.Find("Terra/01-Bloco-Intacto");
+        Exigir(formando != null && !formando.GetComponent<SpriteRenderer>().enabled && !formando.GetComponent<Collider2D>().enabled, "Bloco pronto fica oculto e sem colisao durante surgimento");
         yield return new WaitForSeconds(.6f);
         Collider2D bloco = Physics2D.OverlapPoint(new Vector2(-3.9f, -2.2f), 1 << 3);
         Exigir(bloco != null, "Evento cria bloco com colisao");

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(PatoController))]
@@ -7,6 +8,10 @@ public class QuestElementPowers : MonoBehaviour
     public enum Elemento { Terra, Ar, Fogo, Gelo }
     public Elemento Atual { get; private set; } = Elemento.Fogo;
     public float Mana { get; private set; } = 100f;
+    public bool SaltoExtraUsado => saltoExtra;
+    public float TempoPlanado => tempoPlanar;
+    public float CustoAtual => custos[(int)Atual];
+    public GameObject BlocoAtual => bloco;
     public float manaMaxima = 100f;
     public float regeneracao = 12f;
     public float duracaoBloco = 8f;
@@ -186,8 +191,34 @@ public class QuestElementPowers : MonoBehaviour
         bloco.layer = 3;
         BoxCollider2D colisao = bloco.AddComponent<BoxCollider2D>();
         colisao.size = bloco.GetComponent<SpriteRenderer>().sprite.bounds.size;
-        QuestMagicArt.Criar("Terra/04-Surgimento-Bloco", destino, tamanho);
-        Destroy(bloco, duracaoBloco);
+        colisao.enabled = false;
+        bloco.GetComponent<SpriteRenderer>().enabled = false;
+        GameObject surgimento = QuestMagicArt.Criar("Terra/04-Surgimento-Bloco", destino, tamanho);
+        if (surgimento != null)
+            surgimento.transform.SetParent(bloco.transform, true);
+        StartCoroutine(MaterializarBloco(bloco, surgimento, tamanho));
+    }
+
+    private IEnumerator MaterializarBloco(GameObject novoBloco, GameObject surgimento, Vector2 tamanho)
+    {
+        if (surgimento != null)
+            yield return new WaitForSeconds(.6f);
+        if (novoBloco == null)
+            yield break;
+        if (surgimento != null)
+            surgimento.SetActive(false);
+        foreach (Collider2D obstaculo in Physics2D.OverlapBoxAll(novoBloco.transform.position, tamanho * .98f, 0))
+        {
+            if (obstaculo.gameObject != novoBloco && (!obstaculo.isTrigger || obstaculo.GetComponent<QuestEnemy>() != null))
+            {
+                Mana = Mathf.Min(manaMaxima, Mana + custos[0]);
+                Destroy(novoBloco);
+                yield break;
+            }
+        }
+        novoBloco.GetComponent<SpriteRenderer>().enabled = true;
+        novoBloco.GetComponent<BoxCollider2D>().enabled = true;
+        Destroy(novoBloco, duracaoBloco);
     }
 
     void OnDisable()

@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "characterFrames": 58,
+    "clips": 8,
+    "effects": 2,
+    "assertions": 479,
+    "combatIntegration": "PENDENTE: controlador novo do boss nao localizado; nenhum dano, hitbox ou evento de combate conectado.",
+    "runtimeCombatTest": "NAO EXECUTADO. Validacao de importacao, curvas e amostragem de clips no Editor; nao equivale a teste da batalha."
+}
