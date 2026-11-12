@@ -12460,7 +12460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2718551643315854799, guid: 4b42ca98d75717f44856c68761d1a03e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7076271665232945918, guid: 4b42ca98d75717f44856c68761d1a03e, type: 3}
       propertyPath: limiteDireito
@@ -19368,7 +19368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309795161969073969, guid: f4b53ab9ac73f2d4b95d392782c52d81, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6339341240483522844, guid: f4b53ab9ac73f2d4b95d392782c52d81, type: 3}
       propertyPath: limiteDireito
@@ -19851,6 +19851,7 @@ MonoBehaviour:
   nomeFase: Tutorial - Primeiros passos
   avisarColetaCompleta: 0
   tutorialFinal: {fileID: 907386326}
+  bossArena: {fileID: 0}
 --- !u!4 &1728263555
 Transform:
   m_ObjectHideFlags: 0

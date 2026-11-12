@@ -17,6 +17,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ArenaFloresta.unity
     guid: 31d23b8959b44a743be4cbd59ef74759
+  - enabled: 1
+    path: Assets/Scenes/CumeDosVentos.unity
+    guid: 22024ed1927a4fa58a637ad846f32721
+  - enabled: 1
+    path: Assets/Scenes/ArenaCume.unity
+    guid: 266474d1a0d54addb139de2f31927c47
+  - enabled: 1
+    path: Assets/Scenes/VulcaoCinzento.unity
+    guid: d67fdcc74d18431cad5c9cd9a995d6d5
+  - enabled: 1
+    path: Assets/Scenes/ArenaVulcao.unity
+    guid: f5c8c5d2563647f59d0e1de8950d0fdc
+  - enabled: 1
+    path: Assets/Scenes/CasteloDoEclipse.unity
+    guid: fa53a5e36fa44a1dadbcdfb1223d6d81
+  - enabled: 1
+    path: Assets/Scenes/ArenaEclipse.unity
+    guid: f8da4c4fbb644a61b2be33325cef7461
+  - enabled: 1
+    path: Assets/Scenes/Epilogo.unity
+    guid: 5a2eb51dd33b4d1c9437bae4273e3511
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

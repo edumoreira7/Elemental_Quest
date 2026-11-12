@@ -15,7 +15,7 @@ public static class QuestReleaseBuilder
 {
     static Font fonte;static Transform canvas;
     static Color creme=new Color(.95f,.94f,.82f),verde=new Color(.64f,.85f,.36f),escuro=new Color(.035f,.085f,.09f);
-    static readonly string[] Cenas={"Assets/Scenes/Inicio.unity","Assets/Scenes/Tutorial.unity","Assets/Scenes/FasePrincipal.unity","Assets/Scenes/ArenaFloresta.unity"};
+    static string[] Cenas => EditorBuildSettings.scenes.Where(s=>s.enabled).Select(s=>s.path).ToArray();
     public static void CriarMenuEValidar()
     {
         if(Application.isPlaying)throw new InvalidOperationException("Saia do Play.");

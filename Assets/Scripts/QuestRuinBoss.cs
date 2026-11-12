@@ -4,7 +4,7 @@ using UnityEngine;
 public class QuestRuinBoss : MonoBehaviour
 {
     public enum Estado { Idle, Preparacao, Execucao, Recuperacao, Vulneravel, RecebendoDano, Derrotado }
-    public enum Ataque { Golpe, Onda, Investida }
+    public enum Ataque { Golpe, Onda, Investida, OndaAlta }
     public Estado Atual { get; private set; }
     public Ataque Padrao { get; private set; }
     public int Vida { get; private set; } = 6;
@@ -31,14 +31,22 @@ public class QuestRuinBoss : MonoBehaviour
     public float Prazo { get; private set; }
     float inicio, inicioInvestida, fimInvestida, duracaoInvestidaAtual;
     int proximo;
+    int ataquesNaSequencia;
+    int tamanhoSequencia;
+    static readonly Ataque[] sequencia = { Ataque.Onda, Ataque.OndaAlta, Ataque.Investida, Ataque.Golpe, Ataque.OndaAlta, Ataque.Onda };
+    public int AtaquesNaSequencia => ataquesNaSequencia;
+    public int TamanhoSequencia => tamanhoSequencia;
+    public bool AtaqueAlto => Padrao==Ataque.OndaAlta;
     bool abriu;
     public QuestBossWave OndaAtual { get; private set; }
 
-    void Start() { Vida=vidaMaxima; poderes=jogador.GetComponent<QuestElementPowers>(); animator.transform.localScale=new Vector3(-escalaVisual,escalaVisual,1); Trocar(Estado.Idle,1.6f); }
+    void Start() { Vida=vidaMaxima; poderes=jogador.GetComponent<QuestElementPowers>(); animator.transform.localScale=new Vector3(-escalaVisual,escalaVisual,1); NovaSequencia(); Trocar(Estado.Idle,1.6f); }
+    void NovaSequencia(){proximo=0;ataquesNaSequencia=0;tamanhoSequencia=SegundaEtapa?6:4;}
     void Trocar(Estado estado,float duracao)
     {
         Atual=estado; inicio=Time.time; Prazo=inicio+duracao;
-        string animacao=estado==Estado.Preparacao || estado==Estado.Execucao ? estado+((int)Padrao).ToString() : estado.ToString();
+        int animacaoAtaque=Padrao==Ataque.OndaAlta?1:(int)Padrao;
+        string animacao=estado==Estado.Preparacao || estado==Estado.Execucao ? estado+animacaoAtaque.ToString() : estado.ToString();
         animator.speed=1;
         foreach(var clip in animator.runtimeAnimatorController.animationClips)
             if(clip.name==animacao) {animator.speed=estado==Estado.Idle||estado==Estado.Vulneravel?1:duracao>0?clip.length/duracao:1;break;}
@@ -48,23 +56,27 @@ public class QuestRuinBoss : MonoBehaviour
     }
     void Preparar()
     {
-        Padrao=(Ataque)(proximo++%3); Direcao=jogador.position.x<transform.position.x?-1:1;
+        Padrao=sequencia[proximo++]; Direcao=jogador.position.x<transform.position.x?-1:1;
         animator.transform.localScale=new Vector3(Direcao*escalaVisual,escalaVisual,1);
-        sentido.text=Direcao<0?"<":">";sentido.transform.position=transform.position+new Vector3(Direcao*1.7f,1.4f,0);
+        sentido.text=Padrao==Ataque.Onda?"PULE":AtaqueAlto?"NO CHAO":Direcao<0?"<":">";sentido.transform.position=transform.position+new Vector3(Direcao*1.7f,2.2f,0);
         inicioInvestida=transform.position.x; fimInvestida=Mathf.Clamp(inicioInvestida+Direcao*3.2f,-5.5f,5.5f);
-        TamanhoImpacto=new Vector2(Padrao==Ataque.Golpe?2.8f:Padrao==Ataque.Onda?6.5f:Mathf.Max(.5f,Mathf.Abs(fimInvestida-inicioInvestida)+1.9f),.7f);
-        float x=Padrao==Ataque.Golpe?transform.position.x+Direcao*2.05f:Padrao==Ataque.Onda?transform.position.x+Direcao*4.2f:(inicioInvestida+fimInvestida)/2;
-        CentroImpacto=new Vector2(x,-2.65f);
-        aviso.transform.position=new Vector3(x,-2.89f,0); aviso.transform.localScale=new Vector3(TamanhoImpacto.x,.18f,1);
-        Trocar(Estado.Preparacao,SegundaEtapa?.8f:.95f);
+        bool onda=Padrao==Ataque.Onda || AtaqueAlto;
+        TamanhoImpacto=new Vector2(Padrao==Ataque.Golpe?2.8f:onda?Mathf.Abs(Direcao*7.8f-transform.position.x):Mathf.Max(.5f,Mathf.Abs(fimInvestida-inicioInvestida)+1.9f),.4f);
+        float x=Padrao==Ataque.Golpe?transform.position.x+Direcao*2.05f:onda?(transform.position.x+Direcao*7.8f)/2:(inicioInvestida+fimInvestida)/2;
+        CentroImpacto=new Vector2(x,AtaqueAlto?-1.05f:-2.65f);
+        aviso.transform.position=new Vector3(x,AtaqueAlto?-1.05f:-2.89f,0); aviso.transform.localScale=new Vector3(TamanhoImpacto.x,.18f,1);
+        Trocar(Estado.Preparacao,SegundaEtapa?.6f:.75f);
     }
     void Executar()
     {
         duracaoInvestidaAtual=DuracaoInvestida;
-        Trocar(Estado.Execucao,Padrao==Ataque.Golpe?.32f:Padrao==Ataque.Onda?1.85f:duracaoInvestidaAtual);
-        if(Padrao==Ataque.Onda) {
-            var obj=Instantiate(prefabOnda,transform.position+new Vector3(Direcao*1.2f,.38f,0),Quaternion.identity);
-            OndaAtual=obj.GetComponent<QuestBossWave>(); OndaAtual.Inicializar(this,Direcao);
+        bool onda=Padrao==Ataque.Onda || AtaqueAlto;
+        float velocidadeOnda=SegundaEtapa?7.2f:6f;
+        Trocar(Estado.Execucao,Padrao==Ataque.Golpe?.32f:onda?16f/velocidadeOnda+.1f:duracaoInvestidaAtual);
+        if(onda) {
+            var obj=Instantiate(prefabOnda,new Vector3(transform.position.x+Direcao*1.2f,AtaqueAlto?-1.05f:-2.62f,0),Quaternion.identity);
+            OndaAtual=obj.GetComponent<QuestBossWave>(); OndaAtual.velocidade=velocidadeOnda;OndaAtual.alcance=16;OndaAtual.Inicializar(this,Direcao);
+            var desenho=obj.GetComponentInChildren<SpriteRenderer>();if(desenho!=null)desenho.color=AtaqueAlto?new Color(.3f,.9f,1):new Color(1,.65f,.15f);
         }
     }
     void Update()
@@ -75,7 +87,7 @@ public class QuestRuinBoss : MonoBehaviour
         if(halo!=null)halo.color=new Color(.2f,1,.25f,aberto?.3f+.15f*Mathf.Sin(Time.time*10):.06f);
         if(efeitoNucleo!=null)efeitoNucleo.SetActive(aberto || Time.time<CuraAte);
         if(visualPrincipal!=null)visualPrincipal.color=Atual==Estado.RecebendoDano?new Color(.6f,1,.65f):Color.white;
-        if(Atual==Estado.Preparacao) aviso.color=new Color(1,.6f,.12f,.55f+.25f*Mathf.Sin(Time.time*12));
+        if(Atual==Estado.Preparacao) aviso.color=AtaqueAlto?new Color(.3f,.9f,1,.65f):new Color(1,.6f,.12f,.55f+.25f*Mathf.Sin(Time.time*12));
         if(Atual==Estado.Derrotado) return;
         if(poderes!=null && poderes.BlocoAtual!=null)AbsorverTerra(poderes.BlocoAtual);
         if(Atual==Estado.Execucao) {
@@ -83,20 +95,22 @@ public class QuestRuinBoss : MonoBehaviour
             if(Padrao==Ataque.Investida) {
                 float x=Mathf.Lerp(inicioInvestida,fimInvestida,Mathf.Clamp01((Time.time-inicio)/duracaoInvestidaAtual));
                 transform.position=new Vector3(x,-3,0);
-                Atingir(new Vector2(x,-2.4f),new Vector2(1.9f,1.2f));
+                Atingir(new Vector2(x,-2.65f),new Vector2(1.9f,.7f));
             }
         }
+        // A onda termina antes do proximo aviso, sem sobrepor ataques de alturas opostas.
+        if(Atual==Estado.Execucao && (Padrao==Ataque.Onda || AtaqueAlto) && OndaAtual==null) Prazo=Mathf.Min(Prazo,Time.time);
         if(Time.time<Prazo)return;
         switch(Atual) {
             case Estado.Idle: Preparar();break;
             case Estado.Preparacao: Executar();break;
             case Estado.Execucao:
                 if(OndaAtual!=null)Destroy(OndaAtual.gameObject);
-                abriu=Padrao!=Ataque.Onda; Trocar(Estado.Recuperacao,.4f);break;
+                ataquesNaSequencia++;abriu=ataquesNaSequencia>=tamanhoSequencia; Trocar(Estado.Recuperacao,SegundaEtapa?.12f:.18f);break;
             case Estado.Recuperacao:
-                if(abriu){abriu=false;Trocar(Estado.Vulneravel,SegundaEtapa?2.2f:2.6f);}else Trocar(Estado.Idle,SegundaEtapa?.65f:.9f);break;
-            case Estado.Vulneravel: abriu=false;Trocar(Estado.Recuperacao,.4f);break;
-            case Estado.RecebendoDano: abriu=false;Trocar(Estado.Recuperacao,.45f);break;
+                if(abriu){abriu=false;Trocar(Estado.Vulneravel,SegundaEtapa?1.8f:2.2f);}else Preparar();break;
+            case Estado.Vulneravel: abriu=false;NovaSequencia();Preparar();break;
+            case Estado.RecebendoDano: abriu=false;NovaSequencia();Preparar();break;
         }
     }
     void Atingir(Vector2 centro,Vector2 tamanho)

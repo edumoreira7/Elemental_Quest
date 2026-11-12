@@ -27,6 +27,7 @@ public class QuestTutorialRanged : MonoBehaviour
         cameraJogo = Camera.main;
         colisorJogador = jogador.GetComponent<Collider2D>();
         vidasAnteriores = QuestSession.Vidas;
+        foreach(var inimigo in new[]{primeiro,segundo})if(inimigo!=null){inimigo.combatePermitido=false;inimigo.enabled=true;inimigo.gameObject.SetActive(true);}
     }
 
     public bool Visivel(QuestEnemy inimigo)
@@ -45,15 +46,7 @@ public class QuestTutorialRanged : MonoBehaviour
             return;
         }
         bool visivel = permitido && Visivel(inimigo);
-        if (!inimigo.gameObject.activeSelf)
-        {
-            if (visivel) inimigo.gameObject.SetActive(true);
-        }
-        if (inimigo.gameObject.activeSelf)
-        {
-            inimigo.enabled = visivel;
-            if (!visivel) inimigo.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-        }
+        inimigo.combatePermitido = visivel;
     }
 
     void Update()

@@ -1,0 +1,71 @@
+[
+  {
+    "name": "Cabra Montesa",
+    "ppu": 179.15789832000007,
+    "pivot": [
+      0.5,
+      0.05485197298437498
+    ],
+    "referenceHeight": 0.82608694,
+    "alphaBounds": [
+      50,
+      85,
+      205,
+      233
+    ],
+    "frames": {
+      "Parado": 4,
+      "Andar": 6,
+      "Ataque": 4,
+      "Dano": 1,
+      "Derrota": 3
+    },
+    "sourceTemplate": "TutorialEtapa3/GuaxinimCorpoACorpo.prefab"
+  },
+  {
+    "name": "Coruja Arqueira",
+    "ppu": 188.47222920267515,
+    "pivot": [
+      0.5,
+      0.05303276773385251
+    ],
+    "referenceHeight": 0.9391304,
+    "alphaBounds": [
+      47,
+      56,
+      220,
+      233
+    ],
+    "frames": {
+      "Parado": 4,
+      "Andar": 6,
+      "Ataque": 4,
+      "Dano": 1,
+      "Derrota": 3
+    },
+    "sourceTemplate": "TutorialEtapa4/AtiradorTutorial.prefab"
+  },
+  {
+    "name": "Iaque Guardiao",
+    "ppu": 173.56482124314152,
+    "pivot": [
+      0.5,
+      0.05594437085094892
+    ],
+    "referenceHeight": 0.9391304,
+    "alphaBounds": [
+      49,
+      70,
+      224,
+      233
+    ],
+    "frames": {
+      "Parado": 4,
+      "Andar": 6,
+      "Ataque": 5,
+      "Dano": 1,
+      "Derrota": 3
+    },
+    "sourceTemplate": "TutorialFinal/GuardiaoTutorial.prefab"
+  }
+]

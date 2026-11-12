@@ -17,6 +17,7 @@ public class QuestEnemy : MonoBehaviour
     public Sprite[] dano;
     public Sprite[] morte;
     public GameObject prefabDisparo;
+    [HideInInspector] public bool combatePermitido = true;
     private float direcao = 1f;
     private Rigidbody2D corpo;
     private bool derrotado;
@@ -66,7 +67,7 @@ public class QuestEnemy : MonoBehaviour
         {
             quadros = atacar;
             instante = Mathf.Clamp01((Time.time - ataqueInicio) / .8f) * atacar.Length;
-            if (!disparou && Time.time >= ataqueInicio + .45f)
+            if (!disparou && combatePermitido && Time.time >= ataqueInicio + .45f)
             {
                 disparou = true;
                 if (tipo == Tipo.Atirador && prefabDisparo != null)
@@ -95,7 +96,7 @@ public class QuestEnemy : MonoBehaviour
         if (derrotado || Time.time < danoAte || Time.time < ataqueInicio + .8f)
             return;
         float alcance = tipo == Tipo.Atirador ? 7f : 1.25f;
-        if (jogador != null && Time.time >= proximoAtaque
+        if (combatePermitido && jogador != null && Time.time >= proximoAtaque
             && Mathf.Abs(jogador.transform.position.x - corpo.position.x) < alcance
             && Mathf.Abs(jogador.transform.position.y - corpo.position.y) < 1.6f
             && (tipo != Tipo.Guardiao || MesmoTerreno(out _)) && CaminhoLivre())
@@ -106,7 +107,7 @@ public class QuestEnemy : MonoBehaviour
             disparou = false;
             return;
         }
-        if (PerseguirGuardiao())
+        if (combatePermitido && PerseguirGuardiao())
             return;
         float velocidadeAtual = velocidade * (tipo == Tipo.Guaxinim ? multiplicadorGuaxinim : 1f);
         if (corpo.position.x < limiteEsquerdo || corpo.position.x > limiteDireito)
@@ -218,7 +219,7 @@ public class QuestEnemy : MonoBehaviour
     void TocarJogador(Collider2D outro)
     {
         QuestPlayer jogador = outro.GetComponent<QuestPlayer>();
-        if (!derrotado && jogador != null && CaminhoLivre())
+        if (combatePermitido && !derrotado && jogador != null && CaminhoLivre())
             jogador.Ferir();
     }
 

@@ -20,8 +20,9 @@ public class QuestBossArena : MonoBehaviour
     public void BossDerrotado(){liberarEm=Time.time+1.2f;}
     public void Concluir()
     {
-        if(boss.Atual!=QuestRuinBoss.Estado.Derrotado || !saida.activeSelf)return;
-        Concluiu=true;var pato=FindAnyObjectByType<PatoController>();pato.enabled=false;pato.GetComponent<Rigidbody2D>().linearVelocity=Vector2.zero;
+        if(Concluiu || Saindo || boss.Atual!=QuestRuinBoss.Estado.Derrotado || !saida.activeSelf)return;
+        if(!QuestCampaign.CompleteGuardian(0))return;
+        Concluiu=true;Saindo=true;QuestCampaign.LeaveArena(0);
     }
     public void RetornarAposDerrota()
     {if(Saindo)return;Saindo=true;boss.Interromper();QuestForestStage.VoltarAPreparacao();}
@@ -33,7 +34,7 @@ public class QuestBossArena : MonoBehaviour
         GUI.Label(new Rect(340,164,600,28),"GUARDIAO DAS RUINAS",estilo);
         var cor=GUI.color;GUI.color=new Color(.04f,.08f,.06f,.95f);GUI.DrawTexture(new Rect(410,195,460,20),Texture2D.whiteTexture);
         GUI.color=new Color(.25f,.9f,.3f);GUI.DrawTexture(new Rect(413,198,454*boss.Vida/boss.vidaMaxima,14),Texture2D.whiteTexture);GUI.color=cor;
-        string dica=boss.Atual==QuestRuinBoss.Estado.Vulneravel?"Nucleo aberto: ataque com magia":boss.Atual==QuestRuinBoss.Estado.Preparacao?boss.Padrao==QuestRuinBoss.Ataque.Golpe?"Golpe: saia da marca ou pule":boss.Padrao==QuestRuinBoss.Ataque.Onda?"Onda de choque: prepare o pulo":"Investida: observe a direcao e desvie":boss.Atual==QuestRuinBoss.Estado.Derrotado?"Guardiao derrotado! Siga ate o portal.":"Nucleo protegido: observe e esquive";
+        string dica=boss.Atual==QuestRuinBoss.Estado.Vulneravel?"Nucleo aberto: ataque com magia":boss.Atual==QuestRuinBoss.Estado.Preparacao?boss.AtaqueAlto?"Ataque alto: fique no chao":boss.Padrao==QuestRuinBoss.Ataque.Golpe?"Golpe baixo: pule ou recue":boss.Padrao==QuestRuinBoss.Ataque.Onda?"Onda baixa: pule":"Investida baixa: pule ou desvie":boss.Atual==QuestRuinBoss.Estado.Derrotado?"Guardiao derrotado! Siga ate o portal.":"Esquive da sequencia: o nucleo abre no final";
         if(Time.time<boss.CuraAte)dica="Terra absorvida: o Guardiao recupera vida!";
         GUI.Label(new Rect(230,222,820,30),dica,estilo);
         if(Concluiu){GUI.Box(new Rect(340,280,600,160),"");GUI.Label(new Rect(360,300,560,50),"Fase concluida!",estilo);if(GUI.Button(new Rect(490,372,300,42),"Voltar ao menu")){Saindo=true;Time.timeScale=1;SceneManager.LoadScene("Inicio");}}

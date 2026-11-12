@@ -1,6 +1,6 @@
 # Preparação do jogo para validação — 11/11/2026
 
-O estado anterior à limpeza foi salvo no commit **e55d26b**. O menu novo e a limpeza ficam **sem commit**, para aprovação depois da jogada do usuário.
+O estado anterior à limpeza foi salvo no commit **e55d26b**. O menu novo e a limpeza foram aprovados, commitados em **729df3d** e enviados para a main. Os ajustes de combate descritos abaixo ficam sem novo commit, para validação.
 
 ## Conteúdo ativo
 
@@ -32,3 +32,19 @@ Build Windows gerado com sucesso em `C:\Users\morei\Documents\Codex\EQ-final-pre
 5. Percorrer a fase, morrer após checkpoint, entrar na arena, testar o boss e sua absorção de Terra, vencer e voltar ao menu.
 
 A jogada humana, a leitura final da interface, os controles reais e o equilíbrio do boss ainda aguardam aprovação. Só depois dessa revisão deve ser feito o próximo commit.
+
+## Revisão dos inimigos e do Guardião — 11/11/2026
+
+Os cinco inimigos da fase principal e os três do tutorial permanecem ativos e visíveis desde o carregamento da cena. Eles patrulham suas áreas mesmo à distância. O enquadramento e a seção do encontro controlam somente a permissão de atacar e perseguir; não escondem mais os objetos nem desativam sua animação. Disparos fora da câmera continuam bloqueados.
+
+As oito cartelas do Guardião receberam escala de importação calibrada pela silhueta do primeiro quadro e pivôs alinhados aos pés. Uma escala constante por cartela preserva a mudança de pose durante os golpes e a queda da derrota, sem redimensionamento dinâmico do corpo a cada quadro. As imagens e os colliders originais foram preservados.
+
+O Guardião executa a sequência onda baixa → onda alta → investida baixa → golpe no chão. Só então abre o núcleo. Na segunda metade da vida acrescenta outra onda alta e outra baixa, totalizando seis ataques antes da abertura. Não existe repouso longo entre ataques: há preparação legível e recuperação de 0,18 s, reduzida para 0,12 s na segunda metade. Avisos duram 0,75/0,60 s; ondas percorrem a arena a 6/7,2 unidades por segundo. Uma onda termina antes do ataque seguinte. A janela de vulnerabilidade dura 2,2/1,8 s e fecha ao receber um acerto, retomando a sequência. A vida continua em seis pontos; a dificuldade aumentou pelo padrão de esquiva e pelo ritmo. A absorção e cura por Terra continuam existentes.
+
+Orientação contextual: ataque baixo pede pulo; ataque alto pede ficar no chão. O ataque alto reutiliza a animação e o efeito da onda, com altura e aviso próprios, sem novos controles.
+
+**Executado no Unity em cópia isolada:** 18 verificações de combate/arte, incluindo inimigos ativos, patrulha à distância, bloqueio de ataques fora de câmera, escala de referência das oito animações, dano real da onda baixa, imunidade ao ataque alto no chão, pulo evitando a baixa e sendo atingido pela alta, rejeição de magia com núcleo fechado, dano com núcleo aberto, sequências de quatro e seis ataques, derrota e liberação do portal. As posições de chão/pulo e a vida para segunda etapa/vitória foram preparadas pelo teste; isso não representa uma batalha vencida manualmente. Log: `combat-revision-validated.log`, marcador `EQ_COMBAT_REVISION_OK 18`.
+
+**Regressão executada:** outras 18 verificações de menu, acesso ao tutorial, nova partida, checkpoints, morte, transição para a arena e retorno ao menu; log `combat-revision-flow.log`, marcador `EQ_RELEASE_FLOW_OK`. Capturas reais do boss parado, atacando e vulnerável também foram conferidas. Logs e capturas estão em `C:\Users\morei\Documents\Codex\eq-magic-validation-20261108`.
+
+**Validação manual pendente:** sair do Play, reabrir FasePrincipal e observar os inimigos já posicionados; entrar em ArenaFloresta, comparar o tamanho entre poses, alternar pulo nas ondas baixas e chão nas altas, conferir a abertura após quatro/seis ataques e testar Terra, morte e vitória com controles reais. O julgamento final de dificuldade depende dessa jogada. O executável Windows mencionado anteriormente é anterior a esta revisão; testar estes ajustes no Editor. Nenhum novo commit ou push foi feito nesta etapa.

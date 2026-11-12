@@ -28,6 +28,7 @@ public class QuestTutorialFinal : MonoBehaviour
         controle = jogador.GetComponent<PatoController>();
         cameraJogo = Camera.main;
         vidas = QuestSession.Vidas;
+        if(inimigo!=null){inimigo.combatePermitido=false;inimigo.enabled=true;inimigo.gameObject.SetActive(true);}
         if (RetomarCheckpoint)
         {
             jogador.transform.position = checkpoint.destino;
@@ -46,8 +47,7 @@ public class QuestTutorialFinal : MonoBehaviour
         {
             Vector3 tela = cameraJogo.WorldToViewportPoint(inimigo.transform.position + Vector3.up * .6f);
             bool atuar = jogador.transform.position.x >= 202 && tela.x > .08f && tela.x < .92f && tela.z > 0;
-            if (atuar && !inimigo.gameObject.activeSelf) inimigo.gameObject.SetActive(true);
-            inimigo.enabled = atuar;
+            inimigo.combatePermitido = atuar;
         }
         if (Derrotado && !portal.gameObject.activeSelf)
         {
