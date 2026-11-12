@@ -7,6 +7,7 @@ GameObject:
   - component: {fileID: 101}
   - component: {fileID: 102}
   - component: {fileID: 103}
+  - component: {fileID: 104}
   m_Layer: 0
   m_Name: CampaignScene
   m_TagString: Untagged
@@ -48,6 +49,34 @@ MonoBehaviour:
   heavyPrefab: {fileID: 2718551643315854799, guid: 8bae29aa0826423faacb59ca1b0eeb28, type: 3}
   terrainTop: {fileID: 21300000, guid: 17ce494b6cebcb342b5419a56cced541, type: 2}
   terrainFill: {fileID: 21300000, guid: 5f18b2f9e724f2e46bbca93e70e8ffe3, type: 2}
+--- !u!114 &104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 100}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 0ebe6399502a4b1db1eab617941d4233, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  background: {fileID: 21300000, guid: ebfcb90a67c54ad48a6b0bca9f60f093, type: 3}
+  topLeft: {fileID: 21300000, guid: 300355653258422c80e944a5cbcc629b, type: 3}
+  topCenter: {fileID: 21300000, guid: f2a89955e6884c648d72a59950bcb1ee, type: 3}
+  topRight: {fileID: 21300000, guid: 1766171ed72a43a2b6645e785cbb1de7, type: 3}
+  fill: {fileID: 21300000, guid: c4a69d93c46042a19a7ba9a023e216c7, type: 3}
+  propColumn: {fileID: 21300000, guid: 921d9b261f6b4ddd9a1edc4f25544b6a, type: 3}
+  propRock: {fileID: 21300000, guid: bdd01b2b0a6c4cd9ac3bedecfffa2f54, type: 3}
+  platformLeft: {fileID: 21300000, guid: a19b48a8c3c2411ca0544cfa233f126b, type: 3}
+  platformCenter: {fileID: 21300000, guid: a3cf41e5c3ea4077aeb9c50fb6f4e2a9, type: 3}
+  platformRight: {fileID: 21300000, guid: 92842ceb86804cf780434e70cac674e0, type: 3}
+  propSign: {fileID: 21300000, guid: aac45d79db25415f9d839a2fbf7d46a7, type: 3}
+  crystal: {fileID: 21300000, guid: 947d58cb20db4f97a191a426eb8e9c32, type: 3}
+  topLeftRect: {x: 0, y: 0, width: 256, height: 240}
+  topCenterRect: {x: 1, y: 0, width: 255, height: 249}
+  topRightRect: {x: 0, y: 0, width: 256, height: 256}
+  fillRect: {x: 1, y: 0, width: 255, height: 243}
+  platformLeftRect: {x: 0, y: 0, width: 256, height: 255}
+  platformCenterRect: {x: 0, y: 0, width: 256, height: 256}
+  platformRightRect: {x: 0, y: 0, width: 256, height: 256}
+  cume: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

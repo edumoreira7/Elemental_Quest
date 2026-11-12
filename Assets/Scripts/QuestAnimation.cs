@@ -4,6 +4,7 @@ public class QuestAnimation : MonoBehaviour
 {
     public Sprite[] quadros;
     public float velocidade = 8f;
+    public float escalaVisual = 1f;
     private SpriteRenderer visual;
     private Material materialQuadros;
 
@@ -19,6 +20,10 @@ public class QuestAnimation : MonoBehaviour
         {
             visual.sprite = quadros[Mathf.FloorToInt(Time.time * velocidade) % quadros.Length];
             materialQuadros.mainTexture = visual.sprite.texture;
+            if(escalaVisual!=1f) {
+                visual.drawMode=SpriteDrawMode.Sliced;
+                visual.size=visual.sprite.bounds.size*Mathf.Max(.1f,escalaVisual);
+            }
         }
     }
 

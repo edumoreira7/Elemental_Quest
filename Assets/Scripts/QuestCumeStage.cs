@@ -64,7 +64,8 @@ public class QuestCumeStage : MonoBehaviour
         view.backgroundColor=new Color(.32f,.53f,.67f);cam.transform.position=new Vector3(5,.5f,-10);
         Terrain();
         var boundary=Block("Limite esquerdo",new Vector2(-.6f,0),new Vector2(1,12),Color.clear);boundary.layer=3;boundary.AddComponent<BoxCollider2D>();
-        var player=Instantiate(playerPrefab,new Vector3(2,-1.1f,0),Quaternion.identity);
+        var scaleRoot=new GameObject("Escala do pato - referencia da fase 1").transform;scaleRoot.SetParent(transform,false);scaleRoot.localScale=Vector3.one*.72f;
+        var player=Instantiate(playerPrefab,new Vector3(2,-1.1f,0),Quaternion.identity,scaleRoot);
         player.name="Quackerius - Cume";Player=player.transform;
         health=player.GetComponent<QuestPlayer>();if(health==null)health=player.AddComponent<QuestPlayer>();
         health.AtivarCheckpoint(resume?checkpoint:Player.position);
@@ -95,9 +96,6 @@ public class QuestCumeStage : MonoBehaviour
         Platform(0,12,-2);Platform(16,33,-2);Platform(37,50,-2);
         Platform(52,68,-2);Platform(72,89,-2);Platform(92,112,-2);
         Platform(55,59,1f); // Optional Earth-block route with extra fragments.
-        BackgroundLayer(skyBackground,"Ceu",.05f,-30,32);
-        BackgroundLayer(mountainsBackground,"Montanhas",.16f,-25,38);
-        BackgroundLayer(ruinsBackground,"Ruinas distantes",.28f,-20,34);
         foreach(float x in new[]{5f,20,40,60,78,101}) {
             var ruin=Block("Coluna de ruina clara",new Vector2(x,-.5f),new Vector2(.65f,3),new Color(.65f,.73f,.72f));ruin.GetComponent<SpriteRenderer>().sortingOrder=-3;
             var cap=Block("Capitel",new Vector2(x,1),new Vector2(1.2f,.3f),new Color(.79f,.83f,.78f));cap.GetComponent<SpriteRenderer>().sortingOrder=-3;

@@ -38,7 +38,8 @@ public class QuestMagmaArena : MonoBehaviour
         cameraView=cam.GetComponent<Camera>();cameraView.orthographic=true;cameraView.orthographicSize=5.5f;cameraView.backgroundColor=new Color(.18f,.13f,.16f);FixCamera();
         var floor=Shape("Plataforma da arena",new Vector2(0,Floor-.5f),new Vector2(18,1),new Color(.42f,.43f,.45f));floor.gameObject.layer=3;floor.gameObject.AddComponent<BoxCollider2D>();
         foreach(float x in new[]{-9.3f,9.3f}) {var wall=Shape("Limite da arena",new Vector2(x,1),new Vector2(.6f,7),new Color(.45f,.6f,.68f));wall.gameObject.layer=3;wall.gameObject.AddComponent<BoxCollider2D>();}
-        var obj=Instantiate(playerPrefab,new Vector3(-5,-1.1f,0),Quaternion.identity);player=obj.transform;
+        var scaleRoot=new GameObject("Escala do pato - referencia F1").transform;scaleRoot.SetParent(transform,false);scaleRoot.localScale=Vector3.one*.72f;
+        var obj=Instantiate(playerPrefab,new Vector3(-5,-1.1f,0),Quaternion.identity,scaleRoot);player=obj.transform;
         var health=obj.GetComponent<QuestPlayer>();if(health==null)health=obj.AddComponent<QuestPlayer>();health.AtivarCheckpoint(player.position);
         body=Shape("Salamandra de Magma",new Vector2(5,Floor),Vector2.one,Color.white);boss=body.transform;body.sortingOrder=6;body.sprite=idle[0];
         bossCollider=body.gameObject.AddComponent<BoxCollider2D>();bossCollider.isTrigger=true;bossCollider.size=new Vector2(2.6f,1.2f);bossCollider.offset=new Vector2(0,.6f);
@@ -51,7 +52,7 @@ public class QuestMagmaArena : MonoBehaviour
     SpriteRenderer Shape(string label,Vector2 position,Vector2 size,Color color)
     {
         var obj=new GameObject(label,typeof(SpriteRenderer));obj.transform.SetParent(transform);obj.transform.position=position;obj.transform.localScale=new Vector3(size.x,size.y,1);
-        var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=square;sr.sharedMaterial=material;sr.color=color;return sr;
+        var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=square;sr.sharedMaterial=material;sr.color=color;obj.AddComponent<QuestBossSpriteMaterial>();return sr;
     }
     void FixCamera()
     {
@@ -121,17 +122,17 @@ public class QuestMagmaArena : MonoBehaviour
     {
         Vector3 position=new Vector3(boss.position.x+direction*1.5f,Floor+.9f,0);
         Fx(gustBirth,position,.4f);
-        var obj=new GameObject("Cuspe de magma",typeof(SpriteRenderer));obj.transform.position=position;
+        var obj=new GameObject("Cuspe de magma",typeof(SpriteRenderer));obj.transform.position=position;obj.transform.localScale=Vector3.one*1.15f;
         var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=gustFlight[0];sr.sharedMaterial=material;sr.sortingOrder=7;sr.flipX=direction<0;sr.enabled=false;
-        gust=obj.AddComponent<QuestMagmaGust>();gust.arena=this;gust.frames=gustFlight;gust.origin=position;gust.target=magmaTarget;
+        obj.AddComponent<QuestBossSpriteMaterial>();gust=obj.AddComponent<QuestMagmaGust>();gust.arena=this;gust.frames=gustFlight;gust.origin=position;gust.target=magmaTarget;
     }
     public void DamageBox(Vector2 center,Vector2 size)
     {foreach(var c in Physics2D.OverlapBoxAll(center,size,0)){var health=c.GetComponent<QuestPlayer>();if(health!=null)health.Ferir();}}
     public void Fx(Sprite[] frames,Vector3 position,float duration)
     {
-        var obj=new GameObject("Efeito da Coruja",typeof(SpriteRenderer));obj.transform.position=position;
+        var obj=new GameObject("Efeito de magma",typeof(SpriteRenderer));obj.transform.position=position;if(frames==gustBirth||frames==gustEnd)obj.transform.localScale=Vector3.one*1.15f;
         var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=frames[0];sr.sharedMaterial=material;sr.sortingOrder=8;
-        var animation=obj.AddComponent<QuestAnimation>();animation.quadros=frames;animation.velocidade=frames.Length/duration;Destroy(obj,duration);
+        obj.AddComponent<QuestBossSpriteMaterial>();var animation=obj.AddComponent<QuestAnimation>();animation.quadros=frames;animation.velocidade=frames.Length/duration;Destroy(obj,duration);
     }
     public void Receive(Collider2D other)
     {
@@ -146,7 +147,7 @@ public class QuestMagmaArena : MonoBehaviour
     void OnGUI()
     {
         string hint=Current==State.SpitWarning?"CUSPE: observe a trajetoria e saia da marca":Current==State.AdvanceWarning?"AVANCO: pule ou recue da marca":Current==State.Vulnerable?"Salamandra cansada: ataque com magia":Current==State.Freed?"Salamandra liberta - Cristal do Fogo":"Esquive e espere a recuperacao";
-        GUI.Box(new Rect(20,170,Mathf.Min(Screen.width-40,700),70),"SALAMANDRA DE MAGMA  "+Health+" / 6\n"+hint);
+        QuestHudArt.BossHint("SALAMANDRA DE MAGMA  ".Trim(),Health,hint);
     }
     void OnDestroy(){if(gust!=null)Destroy(gust.gameObject);if(material!=null)Destroy(material);if(square!=null)Destroy(square);}
 }
@@ -176,3 +177,5 @@ public class QuestMagmaGust : MonoBehaviour
         transform.position=next;
     }
 }
+
+

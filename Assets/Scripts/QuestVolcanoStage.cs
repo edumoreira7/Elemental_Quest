@@ -64,7 +64,8 @@ public class QuestVolcanoStage : MonoBehaviour
         view.backgroundColor=new Color(.19f,.16f,.19f);cam.transform.position=new Vector3(5,.5f,-10);
         Terrain();
         var boundary=Block("Limite esquerdo",new Vector2(-.6f,0),new Vector2(1,12),Color.clear);boundary.layer=3;boundary.AddComponent<BoxCollider2D>();
-        var player=Instantiate(playerPrefab,new Vector3(2,-1.1f,0),Quaternion.identity);
+        var scaleRoot=new GameObject("Escala do pato - referencia F1").transform;scaleRoot.SetParent(transform,false);scaleRoot.localScale=Vector3.one*.72f;
+        var player=Instantiate(playerPrefab,new Vector3(2,-1.1f,0),Quaternion.identity,scaleRoot);
         player.name="Quackerius - Cume";Player=player.transform;
         health=player.GetComponent<QuestPlayer>();if(health==null)health=player.AddComponent<QuestPlayer>();
         health.AtivarCheckpoint(resume?checkpoint:Player.position);
@@ -98,13 +99,6 @@ public class QuestVolcanoStage : MonoBehaviour
         Platform(55,59,1f);
         Lava(13,2);Lava(71,2);
         Roots(68);
-        for(int i=0;i<12;i++) {
-            float x=i*11;
-            var cliff=Block("Basalto distante - decoracao",new Vector2(x,0),new Vector2(12,7+(i%3)),new Color(.25f,.22f,.26f));
-            cliff.transform.rotation=Quaternion.Euler(0,0,35);cliff.GetComponent<SpriteRenderer>().sortingOrder=-20;
-            var ash=Block("Cinza distante - decoracao",new Vector2(x+3,2),new Vector2(8,2),new Color(.34f,.29f,.3f));ash.GetComponent<SpriteRenderer>().sortingOrder=-19;
-            var glow=Block("Fissura distante - sem colisao",new Vector2(x,-3),new Vector2(.2f,2),new Color(.8f,.23f,.08f));glow.GetComponent<SpriteRenderer>().sortingOrder=-18;
-        }
     }
     void Lava(float x,float width)
     {

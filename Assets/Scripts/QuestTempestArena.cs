@@ -22,6 +22,7 @@ public class QuestTempestArena : MonoBehaviour
     float since, deadline;
     bool launched, rewardAttempted;
     Vector3 diveStart;
+    Vector3 liftStart;
     float direction;
     public const float Floor=-2f;
     public bool CombatActive => !Leaving && Current!=State.Freed;
@@ -36,11 +37,14 @@ public class QuestTempestArena : MonoBehaviour
         cameraView=cam.GetComponent<Camera>();cameraView.orthographic=true;cameraView.orthographicSize=5.5f;cameraView.backgroundColor=new Color(.28f,.45f,.59f);FixCamera();
         var floor=Shape("Plataforma da arena",new Vector2(0,Floor-.5f),new Vector2(18,1),new Color(.66f,.74f,.76f));floor.gameObject.layer=3;floor.gameObject.AddComponent<BoxCollider2D>();
         foreach(float x in new[]{-9.3f,9.3f}) {var wall=Shape("Limite da arena",new Vector2(x,1),new Vector2(.6f,7),new Color(.45f,.6f,.68f));wall.gameObject.layer=3;wall.gameObject.AddComponent<BoxCollider2D>();}
-        var obj=Instantiate(playerPrefab,new Vector3(-5,-1.1f,0),Quaternion.identity);player=obj.transform;
+        var scaleRoot=new GameObject("Escala do pato - referencia da fase 1").transform;scaleRoot.SetParent(transform,false);scaleRoot.localScale=Vector3.one*.72f;
+        var obj=Instantiate(playerPrefab,new Vector3(-5,-1.1f,0),Quaternion.identity,scaleRoot);player=obj.transform;
         var health=obj.GetComponent<QuestPlayer>();if(health==null)health=obj.AddComponent<QuestPlayer>();health.AtivarCheckpoint(player.position);
-        body=Shape("Gra-Coruja das Tempestades",new Vector2(5,Floor),Vector2.one,Color.white);boss=body.transform;body.sortingOrder=6;body.sprite=idle[0];
-        bossCollider=body.gameObject.AddComponent<BoxCollider2D>();bossCollider.isTrigger=true;bossCollider.size=new Vector2(1.5f,1.8f);bossCollider.offset=new Vector2(0,.9f);
-        body.gameObject.AddComponent<QuestTempestHit>().arena=this;
+        body=Shape("Gra-Coruja das Tempestades",new Vector2(5,Floor),Vector2.one,Color.white);boss=body.transform;body.enabled=false;
+        var art=new GameObject("Visual da Coruja",typeof(SpriteRenderer));art.transform.SetParent(boss,false);
+        body=art.GetComponent<SpriteRenderer>();body.sharedMaterial=material;body.sortingOrder=6;body.sprite=idle[0];art.AddComponent<QuestBossSpriteMaterial>();
+        bossCollider=boss.gameObject.AddComponent<BoxCollider2D>();bossCollider.isTrigger=true;bossCollider.size=new Vector2(1.5f,1.8f);bossCollider.offset=new Vector2(0,.9f);
+        boss.gameObject.AddComponent<QuestTempestHit>().arena=this;
         marker=Shape("Posicao marcada - mergulho",new Vector2(0,Floor+.05f),new Vector2(2.4f,.1f),new Color(1,.65f,.18f));marker.enabled=false;
         exit=Shape("Saida para o Vulcao",new Vector2(8,-.7f),new Vector2(.7f,2.6f),new Color(.55f,.95f,1));exit.gameObject.SetActive(false);
         exit.gameObject.AddComponent<BoxCollider2D>().isTrigger=true;exit.gameObject.AddComponent<QuestTempestExit>().arena=this;
@@ -48,8 +52,8 @@ public class QuestTempestArena : MonoBehaviour
     }
     SpriteRenderer Shape(string label,Vector2 position,Vector2 size,Color color)
     {
-        var obj=new GameObject(label,typeof(SpriteRenderer));obj.transform.SetParent(transform);obj.transform.position=position;obj.transform.localScale=new Vector3(size.x,size.y,1);
-        var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=square;sr.sharedMaterial=material;sr.color=color;return sr;
+        var obj=new GameObject(label,typeof(SpriteRenderer));obj.transform.SetParent(transform);obj.transform.position=position;obj.transform.localScale=Vector3.one*1.35f;obj.transform.localScale=new Vector3(size.x,size.y,1);
+        var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=square;sr.sharedMaterial=material;sr.color=color;obj.AddComponent<QuestBossSpriteMaterial>();return sr;
     }
     void FixCamera()
     {
@@ -65,7 +69,7 @@ public class QuestTempestArena : MonoBehaviour
         if(state==State.DiveWarning) {
             DiveTarget=new Vector2(Mathf.Clamp(player.position.x,-6.8f,6.8f),Floor);
             marker.transform.position=new Vector3(DiveTarget.x,Floor+.05f,0);
-            boss.position=new Vector3(boss.position.x,1.8f,0);
+            liftStart=boss.position;direction=DiveTarget.x<boss.position.x?-1:1;
         }
         if(state==State.Dive)diveStart=boss.position;
         body.flipX=direction<0;
@@ -87,12 +91,14 @@ public class QuestTempestArena : MonoBehaviour
             default:loop=true;break;
         }
         int frame=loop?(int)(t*6)%frames.Length:Mathf.Min(frames.Length-1,(int)(Mathf.Clamp01(t/Mathf.Max(.01f,deadline-since))*frames.Length));body.sprite=frames[frame];
-        // Dive frames use a centered anchor; body is the feet anchor for grounded clips.
-        bossCollider.offset=Current==State.Dive?Vector2.zero:new Vector2(0,.9f);
+        // Keep physics on a feet anchor; compensate the centered flight sprite separately.
+        body.transform.localPosition=Current==State.Dive?Vector3.up*0.70714286f:Vector3.zero;
+        bossCollider.offset=new Vector2(0,.9f);
+        if(Current==State.DiveWarning)boss.position=Vector3.Lerp(liftStart,new Vector3(liftStart.x,1.8f,0),Mathf.SmoothStep(0,1,Mathf.Clamp01(t/.45f)));
         if(Current==State.Gust && !launched && t>=.3f){launched=true;SpawnGust();}
         if(Current==State.Dive) {
-            boss.position=Vector3.Lerp(diveStart,new Vector3(DiveTarget.x,Floor+.9f,0),Mathf.Clamp01(t/.65f));
-            DamageBox(boss.position,new Vector2(1.5f,1.2f));
+            boss.position=Vector3.Lerp(diveStart,new Vector3(DiveTarget.x,Floor,0),Mathf.Clamp01(t/.65f));
+            DamageBox((Vector2)boss.position+Vector2.up*.9f,new Vector2(1.5f,1.2f));
         }
         if(Current==State.Freed) {
             if(Time.time>=deadline&&!rewardAttempted){rewardAttempted=true;campaign.NotifyGuardianDefeated();campaign.CompletePresentation();exit.gameObject.SetActive(QuestCampaign.HasCrystal(1));if(!exit.gameObject.activeSelf)QuestSession.Atual.Avisar("Arena isolada: complete a floresta para recuperar Ar na campanha.");}
@@ -114,17 +120,17 @@ public class QuestTempestArena : MonoBehaviour
     {
         Vector3 position=new Vector3(boss.position.x+direction*1.2f,Floor+.35f,0);
         Fx(gustBirth,position,.4f);
-        var obj=new GameObject("Rajada horizontal",typeof(SpriteRenderer));obj.transform.position=position;
+        var obj=new GameObject("Rajada horizontal",typeof(SpriteRenderer));obj.transform.position=position;obj.transform.localScale=Vector3.one*1.35f;
         var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=gustFlight[0];sr.sharedMaterial=material;sr.sortingOrder=7;sr.flipX=direction<0;
-        gust=obj.AddComponent<QuestTempestGust>();gust.arena=this;gust.direction=direction;gust.frames=gustFlight;
+        obj.AddComponent<QuestBossSpriteMaterial>();gust=obj.AddComponent<QuestTempestGust>();gust.arena=this;gust.direction=direction;gust.frames=gustFlight;
     }
     public void DamageBox(Vector2 center,Vector2 size)
     {foreach(var c in Physics2D.OverlapBoxAll(center,size,0)){var health=c.GetComponent<QuestPlayer>();if(health!=null)health.Ferir();}}
     public void Fx(Sprite[] frames,Vector3 position,float duration)
     {
-        var obj=new GameObject("Efeito da Coruja",typeof(SpriteRenderer));obj.transform.position=position;
-        var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=frames[0];sr.sharedMaterial=material;sr.sortingOrder=8;
-        var animation=obj.AddComponent<QuestAnimation>();animation.quadros=frames;animation.velocidade=frames.Length/duration;Destroy(obj,duration);
+        var obj=new GameObject("Efeito da Coruja",typeof(SpriteRenderer));obj.transform.position=position;if(frames==gustBirth||frames==gustEnd)obj.transform.localScale=Vector3.one*1.35f;
+        var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=frames[0];sr.sharedMaterial=material;sr.sortingOrder=8;sr.flipX=direction<0;
+        obj.AddComponent<QuestBossSpriteMaterial>();var animation=obj.AddComponent<QuestAnimation>();animation.quadros=frames;animation.velocidade=frames.Length/duration;Destroy(obj,duration);
     }
     public void Receive(Collider2D other)
     {
@@ -139,7 +145,7 @@ public class QuestTempestArena : MonoBehaviour
     void OnGUI()
     {
         string hint=Current==State.GustWarning?"RAJADA: prepare o pulo":Current==State.DiveWarning?"MERGULHO: saia da marca no chao":Current==State.Vulnerable?"Guardia no chao: ataque com magia":Current==State.Freed?"Guardia liberta - Cristal do Ar":"Esquive e espere a recuperacao";
-        GUI.Box(new Rect(20,170,Mathf.Min(Screen.width-40,700),70),"GRA-CORUJA DAS TEMPESTADES  "+Health+" / 6\n"+hint);
+        QuestHudArt.BossHint("GRA-CORUJA DAS TEMPESTADES  ".Trim(),Health,hint);
     }
     void OnDestroy(){if(gust!=null)Destroy(gust.gameObject);if(material!=null)Destroy(material);if(square!=null)Destroy(square);}
 }
@@ -168,3 +174,5 @@ public class QuestTempestGust : MonoBehaviour
         transform.position+=Vector3.right*direction*step;
     }
 }
+
+

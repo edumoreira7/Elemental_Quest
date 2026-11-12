@@ -53,7 +53,7 @@ public class QuestEclipseArena : MonoBehaviour
     SpriteRenderer Shape(string label,Vector2 position,Vector2 size,Color color)
     {
         var obj=new GameObject(label,typeof(SpriteRenderer));obj.transform.SetParent(transform);obj.transform.position=position;obj.transform.localScale=new Vector3(size.x,size.y,1);
-        var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=square;sr.sharedMaterial=material;sr.color=color;return sr;
+        var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=square;sr.sharedMaterial=material;sr.color=color;obj.AddComponent<QuestBossSpriteMaterial>();return sr;
     }
     void FixCamera()
     {
@@ -117,17 +117,17 @@ public class QuestEclipseArena : MonoBehaviour
         bool low=Current==State.Wave;
         Vector3 position=new Vector3(boss.position.x+direction*1.2f,low?Floor:Floor+.85f,0);
         Fx(low?waveBirth:gustBirth,position,.34f);
-        var obj=new GameObject(low?"Onda rasteira":"Orbe sombrio",typeof(SpriteRenderer));obj.transform.position=position;
+        var obj=new GameObject(low?"Onda rasteira":"Orbe sombrio",typeof(SpriteRenderer));obj.transform.position=position;obj.transform.localScale=Vector3.one*(low?1.2f:1.25f);
         var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=(low?waveFlight:gustFlight)[0];sr.sharedMaterial=material;sr.sortingOrder=7;sr.flipX=direction<0;sr.enabled=false;
-        gust=obj.AddComponent<QuestEclipseGust>();gust.arena=this;gust.direction=direction;gust.frames=low?waveFlight:gustFlight;gust.ending=low?waveEnd:gustEnd;gust.low=low;
+        obj.AddComponent<QuestBossSpriteMaterial>();gust=obj.AddComponent<QuestEclipseGust>();gust.arena=this;gust.direction=direction;gust.frames=low?waveFlight:gustFlight;gust.ending=low?waveEnd:gustEnd;gust.low=low;
     }
     public void DamageBox(Vector2 center,Vector2 size)
     {foreach(var c in Physics2D.OverlapBoxAll(center,size,0)){var health=c.GetComponent<QuestPlayer>();if(health!=null)health.Ferir();}}
     public void Fx(Sprite[] frames,Vector3 position,float duration)
     {
-        var obj=new GameObject("Efeito da Coruja",typeof(SpriteRenderer));obj.transform.position=position;
+        var obj=new GameObject("Efeito sombrio",typeof(SpriteRenderer));obj.transform.position=position;if(frames==gustBirth||frames==gustEnd)obj.transform.localScale=Vector3.one*1.25f;else if(frames==waveBirth||frames==waveEnd)obj.transform.localScale=Vector3.one*1.2f;
         var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=frames[0];sr.sharedMaterial=material;sr.sortingOrder=8;
-        var animation=obj.AddComponent<QuestAnimation>();animation.quadros=frames;animation.velocidade=frames.Length/duration;Destroy(obj,duration);
+        obj.AddComponent<QuestBossSpriteMaterial>();var animation=obj.AddComponent<QuestAnimation>();animation.quadros=frames;animation.velocidade=frames.Length/duration;Destroy(obj,duration);
     }
     public void Receive(Collider2D other)
     {
@@ -141,8 +141,8 @@ public class QuestEclipseArena : MonoBehaviour
     {if(Leaving||Current!=State.Freed||!exit.gameObject.activeSelf||!QuestCampaign.HasCrystal(3))return;Leaving=true;QuestCampaign.LeaveArena(3);}
     void OnGUI()
     {
-        string hint=Current==State.ShotWarning?"DISPARO SOMBRIO: desvie do orbe":Current==State.WaveWarning?"ONDA RASTEIRA: pule a faixa marcada":Current==State.Vulnerable?"Umbrius em recuperacao: ataque com magia":Current==State.Freed?"Umbrius livre - aproxime-se sem atacar - Cristal do Gelo":"Esquive e espere a recuperacao";
-        GUI.Box(new Rect(20,170,Mathf.Min(Screen.width-40,700),70),"UMBRIUS  "+Health+" / 6\n"+hint);
+        string hint=Current==State.ShotWarning?"DISPARO SOMBRIO: desvie do orbe":Current==State.WaveWarning?"ONDA RASTEIRA: pule a faixa marcada":Current==State.Vulnerable?"Umbrius em recuperacao: ataque com magia":Current==State.Freed?"Umbrius livre: aproxime-se. Cristal do Gelo.":"Esquive e espere a recuperacao";
+        QuestHudArt.BossHint("UMBRIUS  ".Trim(),Health,hint);
     }
     void OnDestroy(){if(gust!=null)Destroy(gust.gameObject);if(material!=null)Destroy(material);if(square!=null)Destroy(square);}
 }
@@ -170,3 +170,5 @@ public class QuestEclipseGust : MonoBehaviour
         arena.DamageBox(center+Vector2.right*direction*step/2,new Vector2(size.x+step,size.y));transform.position+=Vector3.right*direction*step;
     }
 }
+
+

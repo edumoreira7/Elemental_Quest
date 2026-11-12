@@ -20,6 +20,7 @@ public static class QuestVolcanoSmoke
         try {
             var stage=UnityEngine.Object.FindAnyObjectByType<QuestVolcanoStage>();
             if(stage==null||stage.Player==null||stage.Enemies.Count!=5||stage.FragmentCount!=20||QuestSession.Atual.totalItens!=20)throw new Exception("Stage/player/enemy/fragment activation mismatch");
+            if(Mathf.Abs(stage.Player.lossyScale.x-.72f)>.001f || stage.Enemies[1].prefabDisparo.GetComponent<QuestAnimation>().escalaVisual!=2f)throw new Exception("Player/projectile scale mismatch");
             int lava=0,roots=0;
             foreach(var target in UnityEngine.Object.FindObjectsByType<QuestElementTarget>()) {
                 if(target.tipo==QuestElementTarget.Tipo.Raizes){roots++;continue;}
@@ -33,3 +34,4 @@ public static class QuestVolcanoSmoke
         } catch(Exception error){Debug.LogException(error);EditorApplication.Exit(1);}
     }
 }
+

@@ -7,6 +7,7 @@ GameObject:
   - component: {fileID: 101}
   - component: {fileID: 102}
   - component: {fileID: 103}
+  - component: {fileID: 104}
   m_Layer: 0
   m_Name: CampaignScene
   m_TagString: Untagged
@@ -124,6 +125,34 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6874ea386d66457c81fb309110528ab4, type: 3}
   - {fileID: 21300000, guid: e1a7f45293924dabbeb7bb7a5bef1ae8, type: 3}
   - {fileID: 21300000, guid: 197a6b93532a486bbd267ccf340f4054, type: 3}
+--- !u!114 &104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 100}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 0ebe6399502a4b1db1eab617941d4233, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  background: {fileID: 21300000, guid: 96fd1319701b47cd855c83240d671e3c, type: 3}
+  topLeft: {fileID: 21300000, guid: 6057b255b2e34c98ad6b061ef21415f0, type: 3}
+  topCenter: {fileID: 21300000, guid: 16957aca92bc41bd983b381a94af2239, type: 3}
+  topRight: {fileID: 21300000, guid: 660d0c5b657b4ca4badb0031d991be8a, type: 3}
+  fill: {fileID: 21300000, guid: a7bb5729474e4d50899d7811de850729, type: 3}
+  propColumn: {fileID: 21300000, guid: c7a0468fe0974fa5a83b73e7246c7fa2, type: 3}
+  propRock: {fileID: 21300000, guid: 97a1f763e90646b4ac4540f3ef12b18e, type: 3}
+  propSign: {fileID: 21300000, guid: fdb2f50aa99847c182e4f2de9a4ab8db, type: 3}
+  crystal: {fileID: 21300000, guid: 449fe5d83c8b45ce9a2ee89c96b7768c, type: 3}
+  platformLeft: {fileID: 21300000, guid: 87bca9b2b02448fa9c6854d6901674e3, type: 3}
+  platformCenter: {fileID: 21300000, guid: 1e6011a28195422ea72302100b7ee289, type: 3}
+  platformRight: {fileID: 21300000, guid: d1788c6ee16c41b6a38d05ed3731d238, type: 3}
+  topLeftRect: {x: 0, y: 0, width: 64, height: 64}
+  topCenterRect: {x: 0, y: 0, width: 64, height: 64}
+  topRightRect: {x: 0, y: 0, width: 64, height: 64}
+  fillRect: {x: 0, y: 0, width: 64, height: 64}
+  platformLeftRect: {x: 0, y: 40, width: 64, height: 24}
+  platformCenterRect: {x: 0, y: 40, width: 64, height: 24}
+  platformRightRect: {x: 0, y: 40, width: 64, height: 24}
+  cume: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

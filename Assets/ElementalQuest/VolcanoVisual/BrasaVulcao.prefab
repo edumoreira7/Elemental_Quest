@@ -117,6 +117,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8ac84514737e49019831f098d38d1f86, type: 3}
   - {fileID: 21300000, guid: 57ee2534cf744148b00c1cb4bb0896bb, type: 3}
   velocidade: 12
+  escalaVisual: 2
 --- !u!50 &1712466399725625385
 Rigidbody2D:
   serializedVersion: 5

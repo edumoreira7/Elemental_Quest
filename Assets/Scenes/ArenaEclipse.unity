@@ -7,6 +7,7 @@ GameObject:
   - component: {fileID: 101}
   - component: {fileID: 102}
   - component: {fileID: 103}
+  - component: {fileID: 104}
   m_Layer: 0
   m_Name: CampaignScene
   m_TagString: Untagged
@@ -186,8 +187,22 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cdf28e841e1d4e72b3ec966fbe3a7ff4, type: 3}
   - {fileID: 21300000, guid: 18c65487c151400f8d4051d07a8878a6, type: 3}
   - {fileID: 21300000, guid: 29458eee9bfe425b8d5e63a51d8ec9f1, type: 3}
+--- !u!114 &104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5670e5e1eb845b9a7ef43b4225ecd40, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  backdrop: {fileID: 21300000, guid: 77266bbc083947d7bd24e762c69b4d40, type: 3}
+  surface: {fileID: 21300000, guid: 77266bbc083947d7bd24e762c69b4d41, type: 3}
+  masonry: {fileID: 21300000, guid: 77266bbc083947d7bd24e762c69b4d42, type: 3}
+  ledge: {fileID: 21300000, guid: 77266bbc083947d7bd24e762c69b4d43, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 101}
+
