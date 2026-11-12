@@ -1,0 +1,209 @@
+[
+  {
+    "field": "idle",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "walk",
+    "count": 8,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "prepareGust",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "castGust",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "prepareDive",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "dive",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "landing",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "vulnerable",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "hurt",
+    "count": 2,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "freed",
+    "count": 8,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "purified",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "acceptWing",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "gustBirth",
+    "count": 4,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "gustFlight",
+    "count": 4,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "gustEnd",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "waveBirth",
+    "count": 4,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "waveFlight",
+    "count": 4,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "waveEnd",
+    "count": 4,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "bookFloat",
+    "count": 4,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "bookFall",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "bookClosed",
+    "count": 1,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "dust",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  },
+  {
+    "field": "liberation",
+    "count": 6,
+    "ppu": 150,
+    "pivot": [
+      0.5,
+      0.1
+    ]
+  }
+]

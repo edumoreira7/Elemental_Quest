@@ -13,7 +13,7 @@ public static class QuestCampaign
     public static bool HasCrystal(int region) => crystals.Contains(region);
     public static bool HasEvent(string id) => events.Contains(id);
     public static bool MarkEvent(string id) => events.Add(id);
-    public static bool Complete => HasEvent("C06") && CrystalCount == 4;
+    public static bool Complete => HasEvent("Campaign.Ending") && CrystalCount == 4;
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     public static void Reset() { events.Clear(); crystals.Clear(); }
     // Called by the single C02-C05 completion callback (normal or skipped).
@@ -29,7 +29,7 @@ public static class QuestCampaign
     public static bool CompleteEpilogue()
     {
         if(CrystalCount != 4 || !HasEvent("C05")) return false;
-        events.Add("C06"); QuestSession.Venceu=true; return true;
+        events.Add("Campaign.Ending"); QuestSession.Venceu=true; return true;
     }
     public static void Travel(string scene)
     {

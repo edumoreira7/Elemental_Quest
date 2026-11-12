@@ -14,6 +14,20 @@ public static class QuestHudArt
         GUI.DrawTextureWithTexCoords(destino, sprite.texture, new Rect(recorte.x / sprite.texture.width, recorte.y / sprite.texture.height, recorte.width / sprite.texture.width, recorte.height / sprite.texture.height));
     }
 
+    public static string RegionTitle(int region)
+    {
+        string[] names={"Floresta das Raizes Perdidas","Cume dos Ventos Partidos","Vulcao Cinzento","Castelo do Eclipse"};
+        return region>=1&&region<=4?region+" / 4 - "+names[region-1]:"Tutorial";
+    }
+    public static void CampaignCrystals()
+    {
+        string[] names={"TERRA","AR","FOGO","GELO"};
+        GUI.Label(new Rect(835,78,390,22),"CRISTAIS DA CAMPANHA  "+QuestCampaign.CrystalCount+" / 4");
+        for(int i=0;i<4;i++) {
+            var previous=GUI.color;GUI.color=QuestCampaign.HasCrystal(i)?new Color(.6f,1,.8f):new Color(.6f,.62f,.7f);
+            GUI.Label(new Rect(835+i*95,108,95,35),(QuestCampaign.HasCrystal(i)?"[+] ":"[ ] ")+names[i]);GUI.color=previous;
+        }
+    }
     public static void Mostrar(QuestElementPowers poderes)
     {
         for (int indice = 0; indice < 3; indice++)

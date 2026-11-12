@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Gato das Sombras",
+    "ppu": 194.89474074000006,
+    "pivot": [
+      0.5,
+      0.051778370949218736
+    ],
+    "counts": {
+      "Parado": 4,
+      "Andar": 6,
+      "Ataque": 4,
+      "Dano": 1,
+      "Derrota": 3
+    },
+    "source": "TutorialEtapa3/GuaxinimCorpoACorpo.prefab"
+  },
+  {
+    "name": "Corvo Ocultista",
+    "ppu": 188.47222920267515,
+    "pivot": [
+      0.5,
+      0.05303276773385251
+    ],
+    "counts": {
+      "Parado": 4,
+      "Andar": 6,
+      "Ataque": 4,
+      "Dano": 1,
+      "Derrota": 3
+    },
+    "source": "TutorialEtapa4/AtiradorTutorial.prefab"
+  },
+  {
+    "name": "Urso de Armadura Eclipsada",
+    "ppu": 199.12037774519916,
+    "pivot": [
+      0.5,
+      0.06576244097731263
+    ],
+    "counts": {
+      "Parado": 4,
+      "Andar": 6,
+      "Ataque": 5,
+      "Dano": 1,
+      "Derrota": 3
+    },
+    "cell": [
+      320,
+      320
+    ],
+    "source": "TutorialFinal/GuardiaoTutorial.prefab"
+  }
+]

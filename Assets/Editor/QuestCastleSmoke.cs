@@ -26,7 +26,8 @@ public static class QuestCastleSmoke
             }
             if(roots!=1||stage.PlatformCount!=7||Camera.main==null)throw new Exception("Geometry/reference mismatch");
             if(stage.Enemies[0].tipo!=QuestEnemy.Tipo.Guaxinim||stage.Enemies[1].tipo!=QuestEnemy.Tipo.Atirador||stage.Enemies[2].tipo!=QuestEnemy.Tipo.Guardiao)throw new Exception("Archetypes missing");
-            Debug.Log("EQ_CASTLE_ACTIVATION_OK: player, five enemies, three archetypes, 20 fragments, seven platforms, one root, no lava; no full traversal");EditorApplication.Exit(0);
+            if(!stage.Enemies[0].name.Contains("Gato")||!stage.Enemies[1].name.Contains("Corvo")||stage.Enemies[1].prefabDisparo==null||!stage.Enemies[2].name.Contains("Urso")||stage.Enemies[2].atacar.Length!=5)throw new Exception("Castle skins/projectile missing");
+            Debug.Log("EQ_CASTLE_ACTIVATION_OK: player, five enemies, three archetypes, cat, raven and bear skins, 20 fragments, seven platforms, one root, no lava; no full traversal");EditorApplication.Exit(0);
         } catch(Exception error){Debug.LogException(error);EditorApplication.Exit(1);}
     }
 }

@@ -34,9 +34,10 @@ public class QuestSession : MonoBehaviour
     {
         if(texto==null){texto=new GUIStyle(GUI.skin.label){fontSize=24,alignment=TextAnchor.MiddleCenter};pequeno=new GUIStyle(texto){fontSize=18};titulo=new GUIStyle(texto){fontSize=42,fontStyle=FontStyle.Bold};botao=new GUIStyle(GUI.skin.button){fontSize=22};}
         var anterior=GUI.matrix;float s=Mathf.Min(Screen.width/1280f,Screen.height/720f);GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*s)/2,(Screen.height-720*s)/2),Quaternion.identity,Vector3.one*s);
-        Painel(new Rect(20,18,1240,145));GUI.Label(new Rect(35,27,395,50),nomeFase,pequeno);
+        Painel(new Rect(20,18,1240,145));GUI.Label(new Rect(35,27,395,50),(gameObject.scene.name=="Tutorial"?"Tutorial":QuestHudArt.RegionTitle(fase==0?1:fase))+"\n"+nomeFase,pequeno);
         if(poderesHud==null)poderesHud=FindAnyObjectByType<QuestElementPowers>();if(poderesHud!=null)QuestHudArt.Mostrar(poderesHud);
-        GUI.Label(new Rect(675,27,260,50),bossArena==null?"FRAGMENTOS  "+Coletados+" / "+totalItens:"GUARDIAO",texto);GUI.Label(new Rect(960,27,275,50),"PONTOS  "+Pontos.ToString("00000"),texto);
+        GUI.Label(new Rect(675,27,260,50),totalItens>0?"FRAGMENTOS  "+Coletados+" / "+totalItens:"ENCONTRO DO GUARDIAO",texto);GUI.Label(new Rect(960,27,275,50),"PONTOS  "+Pontos.ToString("00000"),texto);
+        QuestHudArt.CampaignCrystals();
         if(Time.unscaledTime<avisoAte){Painel(new Rect(260,175,760,56));GUI.Label(new Rect(270,182,740,40),aviso,pequeno);}
         if(Pausado){Painel(new Rect(400,240,480,300));GUI.Label(new Rect(430,265,420,65),"PAUSA",titulo);if(GUI.Button(new Rect(460,355,360,60),"CONTINUAR",botao)){Pausado=false;Time.timeScale=1;}if(GUI.Button(new Rect(460,433,360,52),"VOLTAR AO MENU",botao))VoltarAoMenu();}
         GUI.matrix=anterior;
