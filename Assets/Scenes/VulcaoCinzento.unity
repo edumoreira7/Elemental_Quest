@@ -6,6 +6,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101}
   - component: {fileID: 102}
+  - component: {fileID: 103}
   m_Layer: 0
   m_Name: CampaignScene
   m_TagString: Untagged
@@ -32,6 +33,21 @@ MonoBehaviour:
   region: 2
   arena: 0
   epilogue: 0
+--- !u!114 &103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b4a1ab09f94c83b59e8c839d0e2443, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  playerPrefab: {fileID: 6701137358759031540, guid: a09e02418a24fbf45b6eb65a01f6ce75, type: 3}
+  meleePrefab: {fileID: 7328243062361155619, guid: 781e7a702479475aab9e751ca9edaaa4, type: 3}
+  rangedPrefab: {fileID: 4309795161969073969, guid: e1071318980d440f9b3c7382ed98c71c, type: 3}
+  heavyPrefab: {fileID: 2718551643315854799, guid: 8bae29aa0826423faacb59ca1b0eeb28, type: 3}
+  terrainTop: {fileID: 21300000, guid: 17ce494b6cebcb342b5419a56cced541, type: 2}
+  terrainFill: {fileID: 21300000, guid: 5f18b2f9e724f2e46bbca93e70e8ffe3, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

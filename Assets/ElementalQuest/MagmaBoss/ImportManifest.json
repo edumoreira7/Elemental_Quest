@@ -1,0 +1,137 @@
+[
+  {
+    "field": "idle",
+    "count": 6,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "walk",
+    "count": 8,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "prepareGust",
+    "count": 6,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "castGust",
+    "count": 6,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "prepareDive",
+    "count": 4,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "dive",
+    "count": 6,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "landing",
+    "count": 6,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "vulnerable",
+    "count": 4,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "hurt",
+    "count": 2,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "freed",
+    "count": 8,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "gustBirth",
+    "count": 4,
+    "ppu": 110,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "gustFlight",
+    "count": 4,
+    "ppu": 110,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "gustEnd",
+    "count": 6,
+    "ppu": 110,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "dust",
+    "count": 4,
+    "ppu": 110,
+    "pivot": [
+      0.60546875,
+      0.1
+    ]
+  },
+  {
+    "field": "liberation",
+    "count": 6,
+    "ppu": 110,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  }
+]

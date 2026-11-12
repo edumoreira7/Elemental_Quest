@@ -20,7 +20,7 @@ public class QuestSession : MonoBehaviour
     QuestElementPowers poderesHud;
     void Awake(){Atual=this;Time.timeScale=1;pontosInicioFase=Pontos;}
     void Update(){if(Input.GetKeyDown(KeyCode.Escape)){Pausado=!Pausado;Time.timeScale=Pausado?0:1;}}
-    public static void PrepararNovaPartida(){QuestCampaign.Reset();QuestCumeStage.ResetProgress();Vidas=3;Pontos=0;Venceu=false;Time.timeScale=1;QuestForestStage.ResetarProgresso();QuestTutorialFinal.ReiniciarProgresso();}
+    public static void PrepararNovaPartida(){QuestCampaign.Reset();QuestCumeStage.ResetProgress();QuestVolcanoStage.ResetProgress();QuestCastleStage.ResetProgress();Vidas=3;Pontos=0;Venceu=false;Time.timeScale=1;QuestForestStage.ResetarProgresso();QuestTutorialFinal.ReiniciarProgresso();}
     public static void NovoJogo(){PrepararNovaPartida();SceneManager.LoadScene("FasePrincipal");}
     public static void IniciarTutorial(){PrepararNovaPartida();SceneManager.LoadScene("Tutorial");}
     public static void VoltarAoMenu(){Time.timeScale=1;SceneManager.LoadScene("Inicio");}

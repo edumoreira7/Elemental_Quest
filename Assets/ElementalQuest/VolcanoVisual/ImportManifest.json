@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Raposa das Cinzas",
+    "ppu": 203.36842512000007,
+    "pivot": [
+      0.5,
+      0.050123354468749985
+    ],
+    "counts": {
+      "Parado": 4,
+      "Andar": 6,
+      "Ataque": 4,
+      "Dano": 1,
+      "Derrota": 3
+    },
+    "source": "TutorialEtapa3/GuaxinimCorpoACorpo.prefab"
+  },
+  {
+    "name": "Lagarto de Brasa",
+    "ppu": 162.9166727006175,
+    "pivot": [
+      0.5,
+      0.05802408736316064
+    ],
+    "counts": {
+      "Parado": 4,
+      "Andar": 6,
+      "Ataque": 4,
+      "Dano": 1,
+      "Derrota": 3
+    },
+    "source": "TutorialEtapa4/AtiradorTutorial.prefab"
+  },
+  {
+    "name": "Javali de Basalto",
+    "ppu": 169.3055618261319,
+    "pivot": [
+      0.5,
+      0.05677625745583361
+    ],
+    "counts": {
+      "Parado": 4,
+      "Andar": 6,
+      "Ataque": 5,
+      "Dano": 1,
+      "Derrota": 3
+    },
+    "source": "TutorialFinal/GuardiaoTutorial.prefab"
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "field": "idle",
+    "folder": "Idle",
+    "count": 6,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.095703125
+    ]
+  },
+  {
+    "field": "prepareGust",
+    "folder": "Preparar_Rajada",
+    "count": 6,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.095703125
+    ]
+  },
+  {
+    "field": "castGust",
+    "folder": "Lancar_Rajada",
+    "count": 6,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.095703125
+    ]
+  },
+  {
+    "field": "prepareDive",
+    "folder": "Preparar_Mergulho",
+    "count": 4,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.095703125
+    ]
+  },
+  {
+    "field": "dive",
+    "folder": "Mergulho",
+    "count": 4,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "landing",
+    "folder": "Pouso_Recuperacao",
+    "count": 6,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.095703125
+    ]
+  },
+  {
+    "field": "vulnerable",
+    "folder": "Vulneravel",
+    "count": 4,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.095703125
+    ]
+  },
+  {
+    "field": "hurt",
+    "folder": "Dano",
+    "count": 2,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.095703125
+    ]
+  },
+  {
+    "field": "freed",
+    "folder": "Libertacao",
+    "count": 8,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.095703125
+    ]
+  },
+  {
+    "field": "gustBirth",
+    "folder": "Rajada_Nascimento",
+    "count": 4,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "gustFlight",
+    "folder": "Rajada_Voo",
+    "count": 4,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "gustEnd",
+    "folder": "Rajada_Dissipacao",
+    "count": 4,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "field": "dust",
+    "folder": "Poeira_Pouso",
+    "count": 4,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.095703125
+    ]
+  },
+  {
+    "field": "liberation",
+    "folder": "Brilho_Libertacao",
+    "count": 6,
+    "ppu": 140,
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  }
+]

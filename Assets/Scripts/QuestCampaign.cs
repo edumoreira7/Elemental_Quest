@@ -46,6 +46,7 @@ public static class QuestCampaign
     {
         if(region==0) QuestForestStage.VoltarAPreparacao();
         else if(region==1) QuestCumeStage.ReturnToPreparation();
-        else if(region>1 && region<4) Travel(Routes[region]);
+        else if(region==2) QuestVolcanoStage.ReturnToPreparation();
+        else if(region==3) QuestCastleStage.ReturnToPreparation();
     }
 }
