@@ -10,6 +10,18 @@ public static class QuestTestBuild
 {
     const string Root="C:/Users/morei/Documents/Jogos Digitais/Builds";
     const string Status="C:/Users/morei/Documents/Jogos Digitais/BuildTeste/status.txt";
+    const string Request="C:/Users/morei/Documents/Jogos Digitais/BuildTeste/request.txt";
+    [InitializeOnLoadMethod]
+    static void ListenForRequest()
+    {
+        if(Application.isBatchMode||Application.dataPath.Replace('\\','/')!="C:/Users/morei/Jogos Digitais/Elemental_Quest/Assets")return;
+        EditorApplication.update-=CheckRequest;EditorApplication.update+=CheckRequest;
+    }
+    static void CheckRequest()
+    {
+        if(EditorApplication.isCompiling||EditorApplication.isUpdating||EditorApplication.isPlaying||!File.Exists(Request))return;
+        File.Delete(Request);EditorApplication.delayCall+=Run;
+    }
     [MenuItem("Tools/Elemental Quest/Gerar versao de teste Windows")]
     public static void Run()
     {
