@@ -39,7 +39,8 @@ public class QuestEclipseArena : MonoBehaviour
         cameraView=cam.GetComponent<Camera>();cameraView.orthographic=true;cameraView.orthographicSize=5.5f;cameraView.backgroundColor=new Color(.13f,.1f,.22f);FixCamera();
         var floor=Shape("Plataforma da arena",new Vector2(0,Floor-.5f),new Vector2(18,1),new Color(.5f,.51f,.58f));floor.gameObject.layer=3;floor.gameObject.AddComponent<BoxCollider2D>();
         foreach(float x in new[]{-9.3f,9.3f}) {var wall=Shape("Limite da arena",new Vector2(x,1),new Vector2(.6f,7),new Color(.45f,.6f,.68f));wall.gameObject.layer=3;wall.gameObject.AddComponent<BoxCollider2D>();}
-        var obj=Instantiate(playerPrefab,new Vector3(-5,-1.1f,0),Quaternion.identity);player=obj.transform;
+        var scaleRoot=new GameObject("Escala do pato - referencia F1").transform;scaleRoot.SetParent(transform,false);scaleRoot.localScale=Vector3.one*.72f;
+        var obj=Instantiate(playerPrefab,new Vector3(-5,-1.1f,0),Quaternion.identity,scaleRoot);player=obj.transform;
         var health=obj.GetComponent<QuestPlayer>();if(health==null)health=obj.AddComponent<QuestPlayer>();health.AtivarCheckpoint(player.position);
         body=Shape("Umbrius",new Vector2(5,Floor),Vector2.one,Color.white);boss=body.transform;body.sortingOrder=6;body.sprite=idle[0];
         bossCollider=body.gameObject.AddComponent<BoxCollider2D>();bossCollider.isTrigger=true;bossCollider.size=new Vector2(.9f,1.5f);bossCollider.offset=new Vector2(0,.75f);

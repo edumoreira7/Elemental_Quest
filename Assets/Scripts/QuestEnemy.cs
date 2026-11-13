@@ -17,6 +17,10 @@ public class QuestEnemy : MonoBehaviour
     public Sprite[] dano;
     public Sprite[] morte;
     public GameObject prefabDisparo;
+    public bool atiradorFixo;
+    public float direcaoFixa = -1f;
+    public float cadenciaTiro = 2.7f;
+    public float escalaDisparo = 1f;
     [HideInInspector] public bool combatePermitido = true;
     private float direcao = 1f;
     private Rigidbody2D corpo;
@@ -73,7 +77,9 @@ public class QuestEnemy : MonoBehaviour
                 if (tipo == Tipo.Atirador && prefabDisparo != null)
                 {
                     Vector3 posicao = transform.position + new Vector3(direcao * .8f, .65f, 0f);
-                    Instantiate(prefabDisparo, posicao, Quaternion.identity).GetComponent<QuestEnemyShot>().Inicializar(direcao);
+                    var tiro = Instantiate(prefabDisparo, posicao, Quaternion.identity);
+                    tiro.GetComponent<QuestEnemyShot>().Inicializar(direcao);
+                    QuestShotVisual.Apply(tiro, escalaDisparo);
                 }
                 else if (jogador != null && Mathf.Abs(jogador.transform.position.x - transform.position.x) < 1.6f
                     && Mathf.Abs(jogador.transform.position.y - transform.position.y) < 1.6f && CaminhoLivre())
@@ -95,6 +101,15 @@ public class QuestEnemy : MonoBehaviour
         movendo = false;
         if (derrotado || Time.time < danoAte || Time.time < ataqueInicio + .8f)
             return;
+        if (tipo == Tipo.Atirador && atiradorFixo)
+        {
+            direcao = direcaoFixa < 0 ? -1 : 1;
+            if (combatePermitido && Time.time >= proximoAtaque)
+            {
+                ataqueInicio = Time.time; proximoAtaque = Time.time + cadenciaTiro; disparou = false;
+            }
+            return;
+        }
         float alcance = tipo == Tipo.Atirador ? 7f : 1.25f;
         if (combatePermitido && jogador != null && Time.time >= proximoAtaque
             && Mathf.Abs(jogador.transform.position.x - corpo.position.x) < alcance

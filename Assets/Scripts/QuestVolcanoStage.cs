@@ -10,26 +10,7 @@ public class QuestVolcanoStage : MonoBehaviour
     public Sprite terrainTop, terrainFill;
     public Sprite skyBackground, mountainsBackground, ruinsBackground;
     static readonly Vector2[] FragmentPositions = {
-        new Vector2(5f,-0.9f),
-        new Vector2(12f,-0.9f),
-        new Vector2(19f,-0.9f),
-        new Vector2(26f,-0.9f),
-        new Vector2(33f,-0.9f),
-        new Vector2(40f,-0.9f),
-        new Vector2(47f,-0.9f),
-        new Vector2(54f,-0.9f),
-        new Vector2(61f,-0.9f),
-        new Vector2(68f,-0.9f),
-        new Vector2(75f,-0.9f),
-        new Vector2(82f,-0.9f),
-        new Vector2(89f,-0.9f),
-        new Vector2(96f,-0.9f),
-        new Vector2(13f,-0.3f),
-        new Vector2(15f,-0.3f),
-        new Vector2(36f,-0.2f),
-        new Vector2(70f,-0.1f),
-        new Vector2(56f,1.9f),
-        new Vector2(58f,1.9f)
+new Vector2(5.0f,-0.9f),new Vector2(10.0f,-0.9f),new Vector2(15.0f,-0.6f),new Vector2(19.0f,-0.6f),new Vector2(24.0f,-0.9f),new Vector2(29.0f,-0.9f),new Vector2(33.0f,-0.9f),new Vector2(39.0f,0.3f),new Vector2(44.0f,0.3f),new Vector2(48.0f,0.3f),new Vector2(54.0f,-0.9f),new Vector2(57.0f,2.5f),new Vector2(59.0f,2.5f),new Vector2(63.0f,-0.9f),new Vector2(67.0f,-0.9f),new Vector2(72.0f,-0.6f),new Vector2(75.0f,-0.6f),new Vector2(79.0f,0.1f),new Vector2(86.0f,0.1f),new Vector2(99.0f,-0.9f)
     };
     public Transform Player { get; private set; }
     public int PlatformCount { get; private set; }
@@ -76,7 +57,7 @@ public class QuestVolcanoStage : MonoBehaviour
         Enemy(heavyPrefab,63,59,66,54,70);
         // Short combination follows three isolated archetypes.
         Enemy(meleePrefab,79,76,81,72,88);Enemy(rangedPrefab,85,83,87,72,89);
-        Checkpoint(18);Checkpoint(53);Checkpoint(98);
+        Checkpoint(23);Checkpoint(53);Checkpoint(98);
         Sign(3,"VULCAO CINZENTO\nPiso claro: basalto seguro. Laranja: lava.");
         Sign(9,"4: GELO + J congela a superficie marcada por 8s.\nPouse adiante; ha espaco para recuperar mana.");
         Sign(21,"Enfrente um inimigo de cada vez.\nRecue sobre o basalto.");
@@ -94,10 +75,8 @@ public class QuestVolcanoStage : MonoBehaviour
     void Terrain()
     {
         // Each ledge has a single continuous collider, avoiding tile seams.
-        Platform(0,12,-2);Platform(14,33,-2);Platform(36,50,-2);
-        Platform(52,70,-2);Platform(72,89,-2);Platform(92,112,-2);
-        Platform(55,59,1f);
-        Lava(13,2);Lava(71,2);
+        foreach(var floor in QuestStageLayout.Floors(3))Platform(floor.x,floor.y,floor.z);
+        Lava(16.5f,9);Lava(73,6);
         Roots(68);
     }
     void Lava(float x,float width)
@@ -145,21 +124,20 @@ public class QuestVolcanoStage : MonoBehaviour
     void Enemy(GameObject prefab,float x,float left,float right,float zoneStart,float zoneEnd)
     {
         var go=Instantiate(prefab,new Vector3(x,-1.4f,0),Quaternion.identity);go.name="Encontro do Vulcao - "+prefab.name;
-        var enemy=go.GetComponent<QuestEnemy>();enemy.limiteEsquerdo=left;enemy.limiteDireito=right;enemy.combatePermitido=false;
+        var enemy=go.GetComponent<QuestEnemy>();enemy.limiteEsquerdo=left;enemy.limiteDireito=right;enemy.combatePermitido=false;if(enemy.tipo==QuestEnemy.Tipo.Atirador)enemy.escalaDisparo=.7f;
         // Ground by collider bounds rather than assuming all archetypes have the same pivot.
-        var bounds=go.GetComponent<Collider2D>().bounds;go.transform.position+=Vector3.up*(-2-bounds.min.y+.03f);
+        var bounds=go.GetComponent<Collider2D>().bounds;go.transform.position+=Vector3.up*(QuestStageLayout.Ground(3,x)-bounds.min.y+.03f);
         Enemies.Add(enemy);zones.Add(new Vector2(zoneStart,zoneEnd));
     }
     void Checkpoint(float x)
     {
-        var go=Block("Checkpoint - respiro",new Vector2(x,-1.25f),new Vector2(.35f,1.5f),new Color(.4f,1,.75f));
+        var go=Block("Checkpoint - respiro",new Vector2(x,QuestStageLayout.Ground(3,x)+.75f),new Vector2(.35f,1.5f),new Color(.4f,1,.75f));
         var box=go.AddComponent<BoxCollider2D>();box.isTrigger=true;
-        go.AddComponent<QuestCheckpoint>().destino=new Vector3(x,-1.1f,0);
+        go.AddComponent<QuestCheckpoint>().destino=new Vector3(x,QuestStageLayout.Ground(3,x)+.9f,0);
     }
     void Fragment(float x,float y)
     {
         // Keep fragments over safe floors, except the explicitly signposted Air gaps.
-        if((x>12&&x<16)||(x>33&&x<37)||(x>68&&x<72)||(x>89&&x<92))y=.0f;
         var go=Block("Fragmento local - orientacao",new Vector2(x,y),new Vector2(.22f,.32f),new Color(.6f,1,1));
         go.transform.rotation=Quaternion.Euler(0,0,45);go.GetComponent<SpriteRenderer>().sortingOrder=4;
         var collider=go.AddComponent<BoxCollider2D>();collider.isTrigger=true;go.AddComponent<QuestCrystal>();FragmentCount++;
@@ -167,7 +145,7 @@ public class QuestVolcanoStage : MonoBehaviour
     void Sign(float x,string text)
     {
         var go=Block("Placa - "+text.Split('\n')[0],new Vector2(x,-.8f),new Vector2(.8f,.65f),new Color(.21f,.32f,.37f));
-        var label=new GameObject("Texto da placa",typeof(TextMesh));label.transform.SetParent(transform);label.transform.position=new Vector3(x,.25f,-.2f);
+        var label=new GameObject("Texto da placa",typeof(TextMesh));label.transform.SetParent(transform);label.transform.position=new Vector3(x,QuestStageLayout.Ground(3,x)+2.25f,-.2f);
         var tm=label.GetComponent<TextMesh>();tm.text=text;tm.fontSize=38;tm.characterSize=.065f;tm.anchor=TextAnchor.MiddleCenter;tm.color=Color.white;
         label.GetComponent<MeshRenderer>().sortingOrder=5;
     }

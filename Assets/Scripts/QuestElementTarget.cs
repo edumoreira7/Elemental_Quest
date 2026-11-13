@@ -9,6 +9,14 @@ public class QuestElementTarget : MonoBehaviour
     private float descongelar;
     private BoxCollider2D colisor;
     private GameObject visualGelo;
+    public bool Congelado => ativo && tipo != Tipo.Raizes;
+
+    void Start()
+    {
+        string scene=gameObject.scene.name;
+        if(tipo!=Tipo.Raizes&&(scene=="FasePrincipal"||scene=="VulcaoCinzento"))
+            gameObject.AddComponent<QuestAnimatedLiquid>();
+    }
 
     void Awake()
     {

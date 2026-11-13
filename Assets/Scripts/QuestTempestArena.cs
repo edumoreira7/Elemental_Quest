@@ -52,7 +52,7 @@ public class QuestTempestArena : MonoBehaviour
     }
     SpriteRenderer Shape(string label,Vector2 position,Vector2 size,Color color)
     {
-        var obj=new GameObject(label,typeof(SpriteRenderer));obj.transform.SetParent(transform);obj.transform.position=position;obj.transform.localScale=Vector3.one*1.35f;obj.transform.localScale=new Vector3(size.x,size.y,1);
+        var obj=new GameObject(label,typeof(SpriteRenderer));obj.transform.SetParent(transform);obj.transform.position=position;obj.transform.localScale=Vector3.one*1f;obj.transform.localScale=new Vector3(size.x,size.y,1);
         var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=square;sr.sharedMaterial=material;sr.color=color;obj.AddComponent<QuestBossSpriteMaterial>();return sr;
     }
     void FixCamera()
@@ -120,7 +120,7 @@ public class QuestTempestArena : MonoBehaviour
     {
         Vector3 position=new Vector3(boss.position.x+direction*1.2f,Floor+.35f,0);
         Fx(gustBirth,position,.4f);
-        var obj=new GameObject("Rajada horizontal",typeof(SpriteRenderer));obj.transform.position=position;obj.transform.localScale=Vector3.one*1.35f;
+        var obj=new GameObject("Rajada horizontal",typeof(SpriteRenderer));obj.transform.position=position;obj.transform.localScale=Vector3.one*1f;
         var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=gustFlight[0];sr.sharedMaterial=material;sr.sortingOrder=7;sr.flipX=direction<0;
         obj.AddComponent<QuestBossSpriteMaterial>();gust=obj.AddComponent<QuestTempestGust>();gust.arena=this;gust.direction=direction;gust.frames=gustFlight;
     }
@@ -128,7 +128,7 @@ public class QuestTempestArena : MonoBehaviour
     {foreach(var c in Physics2D.OverlapBoxAll(center,size,0)){var health=c.GetComponent<QuestPlayer>();if(health!=null)health.Ferir();}}
     public void Fx(Sprite[] frames,Vector3 position,float duration)
     {
-        var obj=new GameObject("Efeito da Coruja",typeof(SpriteRenderer));obj.transform.position=position;if(frames==gustBirth||frames==gustEnd)obj.transform.localScale=Vector3.one*1.35f;
+        var obj=new GameObject("Efeito da Coruja",typeof(SpriteRenderer));obj.transform.position=position;if(frames==gustBirth||frames==gustEnd)obj.transform.localScale=Vector3.one*1f;
         var sr=obj.GetComponent<SpriteRenderer>();sr.sprite=frames[0];sr.sharedMaterial=material;sr.sortingOrder=8;sr.flipX=direction<0;
         obj.AddComponent<QuestBossSpriteMaterial>();var animation=obj.AddComponent<QuestAnimation>();animation.quadros=frames;animation.velocidade=frames.Length/duration;Destroy(obj,duration);
     }
@@ -145,7 +145,7 @@ public class QuestTempestArena : MonoBehaviour
     void OnGUI()
     {
         string hint=Current==State.GustWarning?"RAJADA: prepare o pulo":Current==State.DiveWarning?"MERGULHO: saia da marca no chao":Current==State.Vulnerable?"Guardia no chao: ataque com magia":Current==State.Freed?"Guardia liberta - Cristal do Ar":"Esquive e espere a recuperacao";
-        QuestHudArt.BossHint("GRA-CORUJA DAS TEMPESTADES  ".Trim(),Health,hint);
+        QuestHudArt.BossBar("GRA-CORUJA DAS TEMPESTADES",Health,6,hint);
     }
     void OnDestroy(){if(gust!=null)Destroy(gust.gameObject);if(material!=null)Destroy(material);if(square!=null)Destroy(square);}
 }

@@ -2,6 +2,25 @@ using UnityEngine;
 
 public static class QuestHudArt
 {
+    public static void BossBar(string name,int health,int maximum,string hint)
+    {
+        var previous=GUI.matrix;var color=GUI.color;
+        GUI.matrix=Matrix4x4.identity;GUI.color=Color.black;
+        var camera=Camera.main;
+        if(camera!=null){var r=camera.pixelRect;float top=Screen.height-r.yMax;
+            if(top>0)GUI.DrawTexture(new Rect(0,0,Screen.width,top),Texture2D.whiteTexture);
+            if(r.yMin>0)GUI.DrawTexture(new Rect(0,Screen.height-r.yMin,Screen.width,r.yMin),Texture2D.whiteTexture);
+            if(r.xMin>0)GUI.DrawTexture(new Rect(0,top,r.xMin,r.height),Texture2D.whiteTexture);
+            if(r.xMax<Screen.width)GUI.DrawTexture(new Rect(r.xMax,top,Screen.width-r.xMax,r.height),Texture2D.whiteTexture);
+        }
+        float scale=Mathf.Min(Screen.width/1280f,Screen.height/720f);
+        GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-720*scale)/2),Quaternion.identity,Vector3.one*scale);
+        GUI.color=Color.white;GUI.Label(new Rect(340,164,600,28),name,new GUIStyle(GUI.skin.label){fontSize=20,alignment=TextAnchor.MiddleCenter});
+        GUI.color=new Color(.04f,.08f,.06f,.95f);GUI.DrawTexture(new Rect(410,195,460,20),Texture2D.whiteTexture);
+        GUI.color=new Color(.25f,.9f,.3f);GUI.DrawTexture(new Rect(413,198,454*Mathf.Clamp01(health/(float)maximum),14),Texture2D.whiteTexture);
+        GUI.color=color;GUI.Label(new Rect(370,222,540,24),hint,new GUIStyle(GUI.skin.label){fontSize=17,alignment=TextAnchor.MiddleCenter});
+        GUI.matrix=previous;
+    }
     public static void BossHint(string name, int health, string hint)
     {
         // Use the HUD's reference canvas instead of a large box in physical pixels.

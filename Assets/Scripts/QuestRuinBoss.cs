@@ -58,7 +58,7 @@ public class QuestRuinBoss : MonoBehaviour
     {
         Padrao=sequencia[proximo++]; Direcao=jogador.position.x<transform.position.x?-1:1;
         animator.transform.localScale=new Vector3(Direcao*escalaVisual,escalaVisual,1);
-        sentido.text=Padrao==Ataque.Onda?"PULE":AtaqueAlto?"NO CHAO":Direcao<0?"<":">";sentido.transform.position=transform.position+new Vector3(Direcao*1.7f,2.2f,0);
+        sentido.text=Padrao==Ataque.Onda?"^":AtaqueAlto?"v":Direcao<0?"<":">";sentido.fontSize=48;sentido.characterSize=.1f;sentido.transform.position=transform.position+new Vector3(Direcao*1.7f,2.2f,0);
         inicioInvestida=transform.position.x; fimInvestida=Mathf.Clamp(inicioInvestida+Direcao*3.2f,-5.5f,5.5f);
         bool onda=Padrao==Ataque.Onda || AtaqueAlto;
         TamanhoImpacto=new Vector2(Padrao==Ataque.Golpe?2.8f:onda?Mathf.Abs(Direcao*7.8f-transform.position.x):Mathf.Max(.5f,Mathf.Abs(fimInvestida-inicioInvestida)+1.9f),.4f);
@@ -75,8 +75,9 @@ public class QuestRuinBoss : MonoBehaviour
         Trocar(Estado.Execucao,Padrao==Ataque.Golpe?.32f:onda?16f/velocidadeOnda+.1f:duracaoInvestidaAtual);
         if(onda) {
             var obj=Instantiate(prefabOnda,new Vector3(transform.position.x+Direcao*1.2f,AtaqueAlto?-1.05f:-2.62f,0),Quaternion.identity);
+            QuestShotVisual.Apply(obj,1.45f);
             OndaAtual=obj.GetComponent<QuestBossWave>(); OndaAtual.velocidade=velocidadeOnda;OndaAtual.alcance=16;OndaAtual.Inicializar(this,Direcao);
-            var desenho=obj.GetComponentInChildren<SpriteRenderer>();if(desenho!=null)desenho.color=AtaqueAlto?new Color(.3f,.9f,1):new Color(1,.65f,.15f);
+            foreach(var desenho in obj.GetComponentsInChildren<SpriteRenderer>())if(desenho.enabled)desenho.color=AtaqueAlto?new Color(.3f,.9f,1):new Color(1,.65f,.15f);
         }
     }
     void Update()
@@ -160,3 +161,4 @@ public class QuestRuinBoss : MonoBehaviour
     public void Interromper()
     {if(OndaAtual!=null)Destroy(OndaAtual.gameObject);aviso.enabled=false;sentido.gameObject.SetActive(false);}
 }
+

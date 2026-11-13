@@ -10,26 +10,7 @@ public class QuestCastleStage : MonoBehaviour
     public Sprite terrainTop, terrainFill;
     public Sprite skyBackground, mountainsBackground, ruinsBackground;
     static readonly Vector2[] FragmentPositions = {
-        new Vector2(5f,-0.9f),
-        new Vector2(12f,-0.9f),
-        new Vector2(19f,-0.9f),
-        new Vector2(26f,-0.9f),
-        new Vector2(33f,-0.9f),
-        new Vector2(40f,-0.9f),
-        new Vector2(47f,-0.9f),
-        new Vector2(54f,-0.9f),
-        new Vector2(61f,-0.9f),
-        new Vector2(68f,-0.9f),
-        new Vector2(75f,-0.9f),
-        new Vector2(82f,-0.9f),
-        new Vector2(89f,-0.9f),
-        new Vector2(96f,-0.9f),
-        new Vector2(13f,-0.3f),
-        new Vector2(15f,-0.3f),
-        new Vector2(36f,-0.2f),
-        new Vector2(70f,-0.1f),
-        new Vector2(56f,1.9f),
-        new Vector2(58f,1.9f)
+new Vector2(5.0f,-0.9f),new Vector2(11.0f,-0.9f),new Vector2(19.0f,0.1f),new Vector2(24.0f,0.1f),new Vector2(29.0f,0.1f),new Vector2(33.0f,0.1f),new Vector2(39.0f,-0.9f),new Vector2(44.0f,-0.9f),new Vector2(48.0f,-0.9f),new Vector2(54.0f,-0.9f),new Vector2(56.0f,2.0f),new Vector2(58.0f,2.0f),new Vector2(64.0f,-0.9f),new Vector2(68.0f,-0.9f),new Vector2(74.0f,0.5f),new Vector2(78.0f,0.5f),new Vector2(83.0f,0.5f),new Vector2(88.0f,0.5f),new Vector2(96.0f,-0.9f),new Vector2(102.0f,-0.9f)
     };
     public Transform Player { get; private set; }
     public int PlatformCount { get; private set; }
@@ -64,7 +45,8 @@ public class QuestCastleStage : MonoBehaviour
         view.backgroundColor=new Color(.11f,.09f,.18f);cam.transform.position=new Vector3(5,.5f,-10);
         Terrain();
         var boundary=Block("Limite esquerdo",new Vector2(-.6f,0),new Vector2(1,12),Color.clear);boundary.layer=3;boundary.AddComponent<BoxCollider2D>();
-        var player=Instantiate(playerPrefab,new Vector3(2,-1.1f,0),Quaternion.identity);
+        var scaleRoot=new GameObject("Escala do pato - referencia F1").transform;scaleRoot.SetParent(transform,false);scaleRoot.localScale=Vector3.one*.72f;
+        var player=Instantiate(playerPrefab,new Vector3(2,-1.1f,0),Quaternion.identity,scaleRoot);
         player.name="Quackerius - Castelo";Player=player.transform;
         health=player.GetComponent<QuestPlayer>();if(health==null)health=player.AddComponent<QuestPlayer>();
         health.AtivarCheckpoint(resume?checkpoint:Player.position);
@@ -75,9 +57,9 @@ public class QuestCastleStage : MonoBehaviour
         Enemy(heavyPrefab,63,59,66,54,70);
         // Short combination follows three isolated archetypes.
         Enemy(meleePrefab,79,76,81,72,88);Enemy(rangedPrefab,85,83,87,72,89);
-        Checkpoint(18);Checkpoint(53);Checkpoint(98);
+        Checkpoint(20);Checkpoint(53);Checkpoint(98);
         Sign(3,"CASTELO DO ECLIPSE\nPiso claro e solido. Sombra violeta e decoracao.");
-        Sign(10,"2: AR - salto extra com Espaco; planar com J.\nVeja o pouso claro antes de saltar.");
+        Sign(10,"GALERIAS DO ECLIPSE\nSuba com Ar. Use os corredores para recuar.");
         Sign(22,"Recue no piso livre ao enfrentar o sentinela.\nJ conjura o elemento selecionado.");
         Sign(52,"CHECKPOINT - RESPIRO\n1: Terra cria apoio para a galeria alta opcional.");
         Sign(70,"3: FOGO remove as raizes marcadas.\nCombine salto e magia no proximo salao.");
@@ -92,10 +74,8 @@ public class QuestCastleStage : MonoBehaviour
     void Terrain()
     {
         // Each ledge has a single continuous collider, avoiding tile seams.
-        Platform(0,12,-2);Platform(16,33,-2);Platform(36,50,-2);
-        Platform(52,70,-2);Platform(73,89,-2);Platform(92,112,-2);
-        Platform(55,59,1f);
-        var roots=Block("Raizes sombrias marcadas - Fogo",new Vector2(74,-.8f),new Vector2(.6f,2.4f),new Color(.3f,.12f,.28f));
+        foreach(var floor in QuestStageLayout.Floors(4))Platform(floor.x,floor.y,floor.z);
+        var roots=Block("Raizes sombrias marcadas - Fogo",new Vector2(74,.6f),new Vector2(.6f,2.4f),new Color(.3f,.12f,.28f));
         roots.layer=3;roots.AddComponent<BoxCollider2D>();roots.AddComponent<QuestElementTarget>().tipo=QuestElementTarget.Tipo.Raizes;
         for(int i=0;i<10;i++) {
             float x=5+i*11;
@@ -139,21 +119,20 @@ public class QuestCastleStage : MonoBehaviour
     void Enemy(GameObject prefab,float x,float left,float right,float zoneStart,float zoneEnd)
     {
         var go=Instantiate(prefab,new Vector3(x,-1.4f,0),Quaternion.identity);go.name="Encontro do Castelo - "+prefab.name;
-        var enemy=go.GetComponent<QuestEnemy>();enemy.limiteEsquerdo=left;enemy.limiteDireito=right;enemy.combatePermitido=false;
+        var enemy=go.GetComponent<QuestEnemy>();enemy.limiteEsquerdo=left;enemy.limiteDireito=right;enemy.combatePermitido=false;if(enemy.tipo==QuestEnemy.Tipo.Atirador)enemy.escalaDisparo=1.4f;
         // Ground by collider bounds rather than assuming all archetypes have the same pivot.
-        var bounds=go.GetComponent<Collider2D>().bounds;go.transform.position+=Vector3.up*(-2-bounds.min.y+.03f);
+        var bounds=go.GetComponent<Collider2D>().bounds;go.transform.position+=Vector3.up*(QuestStageLayout.Ground(4,x)-bounds.min.y+.03f);
         Enemies.Add(enemy);zones.Add(new Vector2(zoneStart,zoneEnd));
     }
     void Checkpoint(float x)
     {
-        var go=Block("Checkpoint - respiro",new Vector2(x,-1.25f),new Vector2(.35f,1.5f),new Color(.4f,1,.75f));
+        var go=Block("Checkpoint - respiro",new Vector2(x,QuestStageLayout.Ground(4,x)+.75f),new Vector2(.35f,1.5f),new Color(.4f,1,.75f));
         var box=go.AddComponent<BoxCollider2D>();box.isTrigger=true;
-        go.AddComponent<QuestCheckpoint>().destino=new Vector3(x,-1.1f,0);
+        go.AddComponent<QuestCheckpoint>().destino=new Vector3(x,QuestStageLayout.Ground(4,x)+.9f,0);
     }
     void Fragment(float x,float y)
     {
         // Keep fragments over safe floors, except the explicitly signposted Air gaps.
-        if((x>12&&x<16)||(x>33&&x<37)||(x>68&&x<72)||(x>89&&x<92))y=.0f;
         var go=Block("Fragmento local - orientacao",new Vector2(x,y),new Vector2(.22f,.32f),new Color(.6f,1,1));
         go.transform.rotation=Quaternion.Euler(0,0,45);go.GetComponent<SpriteRenderer>().sortingOrder=4;
         var collider=go.AddComponent<BoxCollider2D>();collider.isTrigger=true;go.AddComponent<QuestCrystal>();FragmentCount++;
@@ -161,7 +140,7 @@ public class QuestCastleStage : MonoBehaviour
     void Sign(float x,string text)
     {
         var go=Block("Placa - "+text.Split('\n')[0],new Vector2(x,-.8f),new Vector2(.8f,.65f),new Color(.21f,.32f,.37f));
-        var label=new GameObject("Texto da placa",typeof(TextMesh));label.transform.SetParent(transform);label.transform.position=new Vector3(x,.25f,-.2f);
+        var label=new GameObject("Texto da placa",typeof(TextMesh));label.transform.SetParent(transform);label.transform.position=new Vector3(x,QuestStageLayout.Ground(4,x)+2.25f,-.2f);
         var tm=label.GetComponent<TextMesh>();tm.text=text;tm.fontSize=38;tm.characterSize=.065f;tm.anchor=TextAnchor.MiddleCenter;tm.color=Color.white;
         label.GetComponent<MeshRenderer>().sortingOrder=5;
     }
@@ -188,3 +167,4 @@ public class QuestCastleStage : MonoBehaviour
     }
     void OnDestroy(){if(unlit!=null)Destroy(unlit);if(square!=null)Destroy(square);}
 }
+

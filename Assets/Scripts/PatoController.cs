@@ -55,7 +55,8 @@ public class PatoController : MonoBehaviour
         elementos.AtualizarVoo(noChao);
 
         // Inicia o ataque.
-        if (Input.GetKeyDown(KeyCode.J) && !atacando)
+        if (Input.GetKeyDown(KeyCode.J) && !atacando
+            && !(elementos.Atual == QuestElementPowers.Elemento.Ar && !noChao && rb.linearVelocity.y < 0))
         {
             IniciarAtaque();
         }
