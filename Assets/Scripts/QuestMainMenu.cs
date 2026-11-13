@@ -15,6 +15,7 @@ public class QuestMainMenu : MonoBehaviour
     {
         if(opening)return;QuestSession.PrepararNovaPartida();opening=true;
         menuGroup=GetComponent<CanvasGroup>();if(menuGroup==null)menuGroup=gameObject.AddComponent<CanvasGroup>();menuGroup.interactable=false;menuGroup.blocksRaycasts=false;
+        QuestCutsceneDirector.Play("C01", ContinuarAbertura);
     }
     public void ContinuarAbertura()
     {
@@ -23,7 +24,7 @@ public class QuestMainMenu : MonoBehaviour
     }
     void OnGUI()
     {
-        if(!opening)return;
+        if(!opening || QuestCutsceneDirector.IsPlaying)return;
         var previous=GUI.matrix;float scale=Mathf.Min(Screen.width/1280f,Screen.height/720f);GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-720*scale)/2),Quaternion.identity,Vector3.one*scale);
         GUI.Box(new Rect(170,160,940,400),"");
         var text=new GUIStyle(GUI.skin.label){fontSize=25,wordWrap=true,alignment=TextAnchor.MiddleCenter};

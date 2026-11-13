@@ -103,7 +103,7 @@ public class QuestMagmaArena : MonoBehaviour
             DamageBox((Vector2)boss.position+Vector2.up*.55f,new Vector2(2.1f,1.1f));
         }
         if(Current==State.Freed) {
-            if(Time.time>=deadline&&!rewardAttempted){rewardAttempted=true;campaign.NotifyGuardianDefeated();campaign.CompletePresentation();exit.gameObject.SetActive(QuestCampaign.HasCrystal(2));if(!exit.gameObject.activeSelf)QuestSession.Atual.Avisar("Arena isolada: complete floresta e cume para recuperar Fogo na campanha.");}
+            if(Time.time>=deadline&&!rewardAttempted){rewardAttempted=true;campaign.NotifyGuardianDefeated();campaign.CompletePresentation(() => {exit.gameObject.SetActive(QuestCampaign.HasCrystal(2));if(!exit.gameObject.activeSelf)QuestSession.Atual.Avisar("Arena isolada: complete floresta e cume para recuperar Fogo na campanha.");});}
             return;
         }
         if(Time.time<deadline)return;

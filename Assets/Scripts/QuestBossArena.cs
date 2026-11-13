@@ -8,8 +8,19 @@ public class QuestBossArena : MonoBehaviour
     public bool Saindo {get;private set;}
     public bool Concluiu {get;private set;}
     float liberarEm=-1;
+    bool presentationStarted;
     void Start(){saida.SetActive(false);FixarCamera();}
-    void LateUpdate(){FixarCamera();if(liberarEm>0&&Time.time>=liberarEm&&!saida.activeSelf)saida.SetActive(true);}
+    void LateUpdate()
+    {
+        FixarCamera();
+        if(liberarEm>0 && Time.time>=liberarEm && !presentationStarted)
+        {
+            presentationStarted=true;
+            if(QuestCampaign.HasEvent("C02"))ConcluirApresentacao();
+            else QuestCutsceneDirector.Play("C02", ConcluirApresentacao);
+        }
+    }
+    void ConcluirApresentacao(){if(QuestCampaign.CompleteGuardian(0))saida.SetActive(true);}
     void FixarCamera()
     {
         cameraJogo.transform.position=new Vector3(0,.5f,-10);cameraJogo.orthographicSize=5.5f;
@@ -21,7 +32,7 @@ public class QuestBossArena : MonoBehaviour
     public void Concluir()
     {
         if(Concluiu || Saindo || boss.Atual!=QuestRuinBoss.Estado.Derrotado || !saida.activeSelf)return;
-        if(!QuestCampaign.CompleteGuardian(0))return;
+        if(!QuestCampaign.HasCrystal(0))return;
         Concluiu=true;Saindo=true;QuestCampaign.LeaveArena(0);
     }
     public void RetornarAposDerrota()

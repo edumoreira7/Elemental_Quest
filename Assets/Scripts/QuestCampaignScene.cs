@@ -9,18 +9,33 @@ public class QuestCampaignScene : MonoBehaviour
     public bool arena;
     public bool epilogue;
     bool leaving;
+    bool presentationPending;
     public bool GuardianDefeated { get; private set; }
     public string CompletionEvent => epilogue ? "C06" : "C0"+(region+2);
     public void NotifyGuardianDefeated() { if(arena) GuardianDefeated=true; }
     // C00 invokes this once after the presentation or skip; never on arena entry.
-    public void CompletePresentation()
+    public void CompletePresentation(System.Action completed = null)
     {
-        if(epilogue) QuestCampaign.CompleteEpilogue();
-        else if(arena && GuardianDefeated) QuestCampaign.CompleteGuardian(region);
+        if(epilogue) { BeginEnding(); return; }
+        if(!arena || !GuardianDefeated) return;
+        if(QuestCampaign.HasEvent(CompletionEvent)) { completed?.Invoke(); return; }
+        if(presentationPending) return;
+        presentationPending=true;
+        if(!QuestCutsceneDirector.Play(CompletionEvent, () => {
+            presentationPending=false;
+            QuestCampaign.CompleteGuardian(region);
+            completed?.Invoke();
+        })) presentationPending=false;
     }
     public void ReturnAfterDefeat() { if(!leaving) {leaving=true;QuestCampaign.Retry(region);} }
     void Go(string scene) { if(leaving)return;leaving=true;QuestCampaign.Travel(scene); }
-    void Start(){if(epilogue)QuestCampaign.CompleteEpilogue();}
+    void Start(){if(epilogue)BeginEnding();}
+    void BeginEnding()
+    {
+        if(presentationPending || QuestCampaign.Complete || QuestCampaign.CrystalCount!=4 || !QuestCampaign.HasEvent("C05")) return;
+        presentationPending=true;
+        if(!QuestCutsceneDirector.Play("C06", () => {presentationPending=false;QuestCampaign.CompleteEpilogue();}))presentationPending=false;
+    }
     void DrawEnding()
     {
         var previous=GUI.matrix;float scale=Mathf.Min(Screen.width/1280f,Screen.height/720f);GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-720*scale)/2),Quaternion.identity,Vector3.one*scale);
@@ -32,6 +47,7 @@ public class QuestCampaignScene : MonoBehaviour
     }
     void OnGUI()
     {
+        if(QuestCutsceneDirector.IsPlaying)return;
         if(epilogue){DrawEnding();return;}
         float w=Mathf.Min(700,Screen.width-32);
         GUILayout.BeginArea(new Rect((Screen.width-w)/2,30,w,Screen.height-60),GUI.skin.box);

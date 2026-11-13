@@ -1,0 +1,126 @@
+{
+  "sequences": [
+    {
+      "id": "C01",
+      "pages": [
+        {
+          "image": "C01_01_Reino",
+          "caption": "Há muito tempo, o Reino de Plumária vivia em equilíbrio graças aos quatro Cristais Elementais: Terra, Ar, Fogo e Gelo."
+        },
+        {
+          "image": "C01_02_Festival",
+          "caption": "Durante um festival, um eclipse escureceu o céu. Enquanto o reino celebrava, alguém subiu a Torre dos Elementos."
+        },
+        {
+          "image": "C01_03_Furto",
+          "caption": "Cansado de viver à sombra do irmão, Umbrius cedeu à magia do eclipse e roubou os quatro cristais."
+        },
+        {
+          "image": "C01_04_Prisao",
+          "caption": "A corrupção se espalhou pelos guardiões. Umbrius aprisionou Aurélia, e Quackerius não conseguiu impedir sua fuga."
+        },
+        {
+          "image": "C01_05_Faiscas",
+          "caption": "Mas Quackerius ainda guardava no cajado uma faísca de cada elemento."
+        },
+        {
+          "image": "C01_06_Partida",
+          "caption": "Com as faíscas no cajado, Quackerius partiu para recuperar os cristais e trazer seu irmão de volta."
+        }
+      ]
+    },
+    {
+      "id": "C02.Intro",
+      "pages": [
+        {
+          "image": "C02_01_Guardiao",
+          "caption": "Na Floresta Encantada, a corrupção despertou o Guardião das Ruínas."
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "pages": [
+        {
+          "image": "C02_02_Terra",
+          "caption": "Livre da corrupção, o Guardião repousou. O Cristal da Terra voltou a brilhar."
+        }
+      ]
+    },
+    {
+      "id": "C03.Intro",
+      "pages": [
+        {
+          "image": "C03_01_Coruja",
+          "caption": "No Cume dos Ventos, a Grã-Coruja das Tempestades agitava as ruínas suspensas."
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "pages": [
+        {
+          "image": "C03_02_Ar",
+          "caption": "A tempestade se acalmou. Liberta, a Grã-Coruja devolveu ao céu o Cristal do Ar."
+        }
+      ]
+    },
+    {
+      "id": "C04.Intro",
+      "pages": [
+        {
+          "image": "C04_01_Salamandra",
+          "caption": "No Vulcão Cinzento, a Salamandra de Magma ardia sob a influência do eclipse."
+        }
+      ]
+    },
+    {
+      "id": "C04",
+      "pages": [
+        {
+          "image": "C04_02_Fogo",
+          "caption": "O calor voltou ao equilíbrio. A Salamandra descansou, e Quackerius recuperou o Cristal do Fogo."
+        }
+      ]
+    },
+    {
+      "id": "C05.Intro",
+      "pages": [
+        {
+          "image": "C05_01_Umbrius",
+          "caption": "No Castelo do Eclipse, Quackerius encontrou o irmão. Umbrius ainda guardava o Cristal do Gelo."
+        }
+      ]
+    },
+    {
+      "id": "C05",
+      "pages": [
+        {
+          "image": "C05_02_Gelo",
+          "caption": "Vencido, Umbrius deixou a magia sombria se dissipar. O último cristal estava livre."
+        }
+      ]
+    },
+    {
+      "id": "C06",
+      "pages": [
+        {
+          "image": "C06_01_Aurelia",
+          "caption": "A luz dos quatro cristais rompeu o selo. Aurélia estava livre."
+        },
+        {
+          "image": "C06_02_Irmaos",
+          "caption": "Quackerius estendeu a asa. Umbrius a aceitou, livre da corrupção."
+        },
+        {
+          "image": "C06_03_Reino",
+          "caption": "Os quatro cristais retornaram à Torre dos Elementos. Plumária recuperou o equilíbrio."
+        },
+        {
+          "image": "C06_04_Regresso",
+          "caption": "Sob um céu claro, Quackerius, Umbrius e Aurélia voltaram juntos. Era o fim de uma jornada — e um novo começo."
+        }
+      ]
+    }
+  ]
+}

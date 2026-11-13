@@ -101,7 +101,7 @@ public class QuestTempestArena : MonoBehaviour
             DamageBox((Vector2)boss.position+Vector2.up*.9f,new Vector2(1.5f,1.2f));
         }
         if(Current==State.Freed) {
-            if(Time.time>=deadline&&!rewardAttempted){rewardAttempted=true;campaign.NotifyGuardianDefeated();campaign.CompletePresentation();exit.gameObject.SetActive(QuestCampaign.HasCrystal(1));if(!exit.gameObject.activeSelf)QuestSession.Atual.Avisar("Arena isolada: complete a floresta para recuperar Ar na campanha.");}
+            if(Time.time>=deadline&&!rewardAttempted){rewardAttempted=true;campaign.NotifyGuardianDefeated();campaign.CompletePresentation(() => {exit.gameObject.SetActive(QuestCampaign.HasCrystal(1));if(!exit.gameObject.activeSelf)QuestSession.Atual.Avisar("Arena isolada: complete a floresta para recuperar Ar na campanha.");});}
             return;
         }
         if(Time.time<deadline)return;
